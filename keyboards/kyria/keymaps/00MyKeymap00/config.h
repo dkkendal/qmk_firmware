@@ -25,13 +25,7 @@
   #define RGBLIGHT_HUE_STEP 8
   #define RGBLIGHT_SAT_STEP 8
   #define RGBLIGHT_VAL_STEP 8
-  #define RGBLIGHT_SLEEP
 #endif
-
-// EC11K encoders have a different resolution than other EC11 encoders.
-// When using the default resolution of 4, if you notice your encoder skipping
-// every other tick, lower the resolution to 2.
-#define ENCODER_RESOLUTION 2
 
 // The Leader key allows to flexibly assign macros to key sequences.
 #define LEADER_PER_KEY_TIMING
@@ -39,13 +33,13 @@
 
 #define TAPPING_TERM 200
 
+// Turn off on slave
+#define WAIT_FOR_USB
 
-#define MK_COMBINED
-
+// If you are using an Elite C rev3 on the slave side, uncomment the lines below:
+#define SPLIT_USB_DETECT
+#define NO_USB_STARTUP_CHECK
 
 // Allows to use either side as the master. Look at the documentation for info:
 // https://docs.qmk.fm/#/config_options?id=setting-handedness
 #define EE_HANDS
-
-// Allows media codes to properly register in macros and rotary encoder code
-#define TAP_CODE_DELAY 10
