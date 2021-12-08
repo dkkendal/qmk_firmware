@@ -1,12 +1,12 @@
 #include QMK_KEYBOARD_H
 
-
 #define _QWERTY 0
 #define _WORKMAN 1
 #define _WASD 2
 #define _NAVI 3
 #define _NUMBERS_L 4
-#define _COLORS 5
+
+bool leading = false;
 
 // enum custom_keycodes {
 //   QWERTY = SAFE_RANGE,
@@ -16,7 +16,6 @@
 //   RAISE,
 //   NAVI,
 //   NUMBERS_L,
-//   COLORS,
 // };
 
 //Tap Dance Declarations
@@ -38,11 +37,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
    [LEFT_HOME] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, KC_HOME),
    [RIGHT_END] = ACTION_TAP_DANCE_DOUBLE(KC_RIGHT, KC_END),
    [MIN_ESC] = ACTION_TAP_DANCE_DOUBLE(KC_MINS, KC_ESC),
-   [END_NAV] = ACTION_TAP_DANCE_LAYER_MOVE(KC_END, NAV),
+   [END_NAV] = ACTION_TAP_DANCE_LAYER_MOVE(KC_END, _NAVI),
    [NINE_BRACK] = ACTION_TAP_DANCE_DOUBLE(KC_9, KC_LBRACKET),
    [ZERO_BRACK] = ACTION_TAP_DANCE_DOUBLE(KC_0, KC_RBRACKET),
-   [PGUP_WASD] = ACTION_TAP_DANCE_LAYER_MOVE(KC_PGUP, WASD),
-   [PGDN_NUMB] = ACTION_TAP_DANCE_LAYER_MOVE(KC_PGDN, NUMBERS),
+   [PGUP_WASD] = ACTION_TAP_DANCE_LAYER_MOVE(KC_PGUP, _WASD),
+   [PGDN_NUMB] = ACTION_TAP_DANCE_LAYER_MOVE(KC_PGDN, _NUMBERS_L),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -115,59 +114,45 @@ KC_EQL, LSFT_T(KC_A), LCTL_T(KC_S), LWIN_T(KC_H), LALT_T(KC_T), KC_G,           
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  ),
-
-  [_COLORS] = LAYOUT(
-  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-    XXXXXXX, RGB_M_SN, XXXXXXX, XXXXXXX, RGB_M_TW, XXXXXXX,                           XXXXXXX, RGB_M_X, XXXXXXX, XXXXXXX, RGB_M_K, XXXXXXX,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, RGB_M_R, RGB_VAD, RGB_SAD, RGB_HUD, XXXXXXX,                            XXXXXXX, RGB_HUI, RGB_SAI, RGB_VAI, RGB_M_SW, XXXXXXX,
-  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LEAD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_LEAD,
-  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
-                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case _QWERTY:
-      if (record->event.pressed) {
-         switch (biton32(layer_state)) {
-            case _QWERTY:
-               layer_move(_WORKMAN);
-               break;
-            default:
-               layer_move(_QWERTY)
-               break;
-         }
-      }
-      return false;
-      break;
-    case _LOWER:
-      if (record->event.pressed) {
-        layer_on(_LOWER);
-      } else {
-        layer_off(_LOWER);
-      }
-      return false;
-      break;
-    case _RAISE:
-      if (record->event.pressed) {
-        layer_on(_RAISE);
-      } else {
-        layer_off(_RAISE);
-      }
-      return false;
-      break;
-    case _NAVI:
-      layer_invert(_NAVI);
-      return false;
-      break;
-  }
+//   switch (keycode) {
+//     case QWERTY:
+//       if (record->event.pressed) {
+//          switch (biton32(layer_state)) {
+//             case _QWERTY:
+//                layer_move(_WORKMAN);
+//                break;
+//             default:
+//                layer_move(_QWERTY)
+//                break;
+//          }
+//       }
+//       return false;
+//       break;
+//     case LOWER:
+//       if (record->event.pressed) {
+//         layer_on(_LOWER);
+//       } else {
+//         layer_off(_LOWER);
+//       }
+//       return false;
+//       break;
+//     case RAISE:
+//       if (record->event.pressed) {
+//         layer_on(_RAISE);
+//       } else {
+//         layer_off(_RAISE);
+//       }
+//       return false;
+//       break;
+//     case NAVI:
+//       layer_invert(_NAVI);
+//       return false;
+//       break;
+//   }
   return true;
 }
 
@@ -176,24 +161,16 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
    if (index == 0) {
       switch (biton32(layer_state)) {
          case _NAVI:
-            if (clockwise) {
+            if (clockwise)
                tap_code(KC_VOLU);
-            } else {
-               tap_code(KC_VOLD);
-            }
-            break;
-         case _COLORS:
-            if(clockwise)
-               tap_code(RGB_HUI);
             else
-               tap_code(RGB_HUD);
+               tap_code(KC_VOLD);
             break;
          default:
-            if (clockwise) {
+            if (clockwise)
                tap_code(KC_VOLU);
-            } else {
+            else
                tap_code(KC_VOLD);
-            }
       }
     }
     else if (index == 1) {
@@ -204,12 +181,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                tap_code16(C(KC_TAB));
             else
                tap_code16(C(KC_TAB));
-            break;
-         case _COLORS:
-            if(clockwise)
-               tap_code(RGB_VAI);
-            else
-               tap_code(RGB_VAD);
             break;
          default:
             if (clockwise) {
@@ -278,16 +249,8 @@ void matrix_scan_user(void) {
          tap_code(KC_F12);
       }
 
-      SEQ_TWO_KEYS(KC_HOME, KC_END){
-         layer_on(_COLORS);
-      }
-
       SEQ_THREE_KEYS(KC_W, KC_A, KC_D){
          layer_invert(_WASD);
-      }
-
-      SEQ_FOUR_KEYS(RGB_HUI, RGB_SAI, RGB_VAI, RGB_SW){
-         layer_off(_COLORS);
       }
    }
 }
