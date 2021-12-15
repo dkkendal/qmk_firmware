@@ -290,27 +290,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    if(record->event.pressed){
       switch (keycode) {
          case SAY_GG:
-            tap_code(KC_ENT);
+            tap_code16(S(KC_ENT));
             SEND_STRING("GG");
-            tap_code(KC_ENT);
+            tap_code16(S(KC_ENT));
             return false;
             break;
          case SAY_WP:
-            tap_code(KC_ENT);
+            tap_code16(S(KC_ENT));
             SEND_STRING("WP");
-            tap_code(KC_ENT);
+            tap_code16(S(KC_ENT));
             return false;
             break;
          case SAY_NS:
-            tap_code(KC_ENT);
+            tap_code16(S(KC_ENT));
             SEND_STRING("NS");
-            tap_code(KC_ENT);
+            tap_code16(S(KC_ENT));
             return false;
             break;
          case SAY_GTG:
-            tap_code(KC_ENT);
+            tap_code16(S(KC_ENT));
             SEND_STRING("GTG");
-            tap_code(KC_ENT);
+            tap_code16(S(KC_ENT));
             return false;
             break;
       }
@@ -323,7 +323,15 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
    if (index == 0) {
       // Left encoder
       switch (biton32(layer_state)) {
-         case _NAVI:
+         case _LOCKED1:
+         case _LOCKED2:
+         case _LOCKED3:
+         case _LOCKED4:
+            if (clockwise)
+               rgblight_step_noeeprom();
+            else
+               rgblight_step_reverse_noeeprom();
+            break;
          default:
             if (clockwise) {
                tap_code(KC_DOWN);
@@ -335,6 +343,15 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     else if (index == 1) {
       // Right encoder
       switch (biton32(layer_state)) {
+         case _LOCKED1:
+         case _LOCKED2:
+         case _LOCKED3:
+         case _LOCKED4:
+            if (clockwise)
+               rgblight_increase_hue_noeeprom();
+            else
+               rgblight_decrease_hue_noeeprom();
+            break;
          case _QWERTY:
          case _WORKMAN:
          default:
