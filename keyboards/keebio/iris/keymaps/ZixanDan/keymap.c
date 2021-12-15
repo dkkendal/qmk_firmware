@@ -149,9 +149,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
       KC_ESC, XXXXXXX,  KC_1,     KC_2,    KC_3,    KC_4,                              XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, XXXXXXX,  KC_Q,     KC_W,    KC_E,    KC_R,                              XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+     XXXXXXX, XXXXXXX,  KC_Q,     KC_W,    KC_E,    KC_R,                              XXXXXXX, XXXXXXX, SAY_NS, XXXXXXX, XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, XXXXXXX,  KC_A,     KC_S,    KC_D,    KC_F,                              XXXXXXX, SAY_GG,  SAY_WP,  SAY_NS,  SAY_GTG, XXXXXXX,
+     XXXXXXX, XXXXXXX,  KC_A,     KC_S,    KC_D,    KC_F,                              XXXXXXX, SAY_GG,  SAY_WP,  SAY_LOL,  SAY_GTG, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -165,11 +165,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                              XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      KC_Y,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                              XXXXXXX, SAY_GG,  SAY_WP,  SAY_LOL, XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,   XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LCTL, _______, _______,                   XXXXXXX, TG(_MOBA), XXXXXXX
+                                    KC_LCTL, _______, _______,                   KC_LSFT, TG(_MOBA), XXXXXXX
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -290,27 +290,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    if(record->event.pressed){
       switch (keycode) {
          case SAY_GG:
-            tap_code16(S(KC_ENT));
-            SEND_STRING("GG");
-            tap_code16(S(KC_ENT));
+            tap_code(KC_ENT);
+            SEND_STRING("gg");
+            tap_code(KC_ENT);
             return false;
             break;
          case SAY_WP:
-            tap_code16(S(KC_ENT));
-            SEND_STRING("WP");
-            tap_code16(S(KC_ENT));
+            tap_code(KC_ENT);
+            SEND_STRING("wp");
+            tap_code(KC_ENT);
             return false;
             break;
          case SAY_NS:
-            tap_code16(S(KC_ENT));
-            SEND_STRING("NS");
-            tap_code16(S(KC_ENT));
+            tap_code(KC_ENT);
+            SEND_STRING("ns");
+            tap_code(KC_ENT);
             return false;
             break;
          case SAY_GTG:
-            tap_code16(S(KC_ENT));
-            SEND_STRING("GTG");
-            tap_code16(S(KC_ENT));
+            tap_code(KC_ENT);
+            SEND_STRING("gtg");
+            tap_code(KC_ENT);
+            return false;
+            break;
+         case SAY_LOL:
+            tap_code(KC_ENT);
+            unregister_code(KC_LSFT);
+            SEND_STRING("lol");
+            tap_code(KC_ENT);
             return false;
             break;
       }
