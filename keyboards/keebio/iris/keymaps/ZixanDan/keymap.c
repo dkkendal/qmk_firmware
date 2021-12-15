@@ -30,6 +30,7 @@ enum custom_keycodes {
   SAY_WP,
   SAY_NS,
   SAY_GTG,
+  SAY_LOL,
 };
 
 //Tap Dance Declarations
