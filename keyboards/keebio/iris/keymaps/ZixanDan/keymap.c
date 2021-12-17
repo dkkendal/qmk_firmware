@@ -282,7 +282,7 @@ XXXXXXX,DF(_QWERTY),DF(_WORKMAN),XXXXXXX, RGB_TOG, XXXXXXX,                     
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    XXXXXXX, XXXXXXX, XXXXXXX,                TG(_LOCKED1), XXXXXXX, XXXXXXX
+                                    XXXXXXX, XXXXXXX, XXXXXXX,                TO(_QWERTY), XXXXXXX, XXXXXXX
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )
 };
