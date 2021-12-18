@@ -176,29 +176,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NAVI] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+     XXXXXXX, KC_LSFT, KC_LCTL, KC_LWIN, KC_LALT, XXXXXXX,                            XXXXXXX, KC_MS_U, KC_MS_D, KC_MS_L, KC_MS_L, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, _______,
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, KC_ACL0, KC_ACL1, KC_ACL2, XXXXXXX, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, _______,                   _______, TG(_WASD), _______
+                                    _______, TG(_NAVI), _______,                 KC_BTN2, KC_BTN1, KC_BTN3
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
   [_NUMBERS_L] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______, _______, _______, _______, _______, _______,                            _______,  KC_PEQL, KC_PSLS, KC_PAST, KC_PMNS, _______,
+TG(_NUMBERS_L), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                           XXXXXXX,  KC_PEQL, KC_PSLS, KC_PAST, KC_PMNS, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______,                            _______,   KC_7,   KC_8,    KC_9,    KC_PPLS, _______,
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX,   KC_7,   KC_8,    KC_9,    KC_PPLS, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______,                            _______,   KC_4,   KC_5,    KC_6,    KC_PENT, _______,
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX,   KC_4,   KC_5,    KC_6,    KC_PENT, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, _______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______,   KC_1,   KC_2,    KC_3,    KC_PDOT, _______,
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,   KC_1,   KC_2,    KC_3,    KC_PDOT, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, _______,                   _______, TG(_WASD), _______
+                                    _______, _______, _______,                   _______, _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -342,6 +342,12 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             else
                rgblight_step_reverse_noeeprom();
             break;
+         case _NAVI:
+            if (clockwise)
+               tap_code(KC_WH_L);
+            else
+               tap_code(KC_WH_R);
+            break;
          default:
             if (clockwise) {
                tap_code(KC_DOWN);
@@ -362,8 +368,12 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             else
                rgblight_decrease_hue_noeeprom();
             break;
-         case _QWERTY:
-         case _WORKMAN:
+         case _NAVI:
+            if (clockwise)
+               tap_code(KC_WH_D);
+            else
+               tap_code(KC_WH_U);
+            break;
          default:
             if (clockwise) {
                tap_code(KC_RIGHT);
