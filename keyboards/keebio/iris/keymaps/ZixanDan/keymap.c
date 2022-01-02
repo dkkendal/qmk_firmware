@@ -1,10 +1,6 @@
 #include QMK_KEYBOARD_H
 
 enum layer_names {
-   _LOCKED1,
-   _LOCKED2,
-   _LOCKED3,
-   _LOCKED4,
    _QWERTY,
    _WORKMAN,
    _CHORDS,
@@ -15,28 +11,14 @@ enum layer_names {
    _LOWER,
    _RAISE,
    _MODS,
+   _LOCKED1,
+   _LOCKED2,
+   _LOCKED3,
+   _LOCKED4,
 };
 
 bool leading = false;
-
-#ifdef SWAP_HANDS_ENABLE
-__attribute__ ((weak))
-// swap-hands action needs a matrix to define the swap
-const keypos_t SH_ON_config[MATRIX_ROWS][MATRIX_COLS] = {
-    /* Left hand, matrix positions */
-    {{0,5}, {1,5}, {2,5}, {3,5}, {4,5}, {5,5}},
-    {{0,6}, {1,6}, {2,6}, {3,6}, {4,6}, {5,6}},
-    {{0,7}, {1,7}, {2,7}, {3,7}, {4,7}, {5,7}},
-    {{0,8}, {1,8}, {2,8}, {3,8}, {4,8}, {5,8}},
-    {{0,9}, {1,9}, {2,9}, {3,9}, {4,9}, {5,9}},
-    /* Right hand, matrix positions */
-    {{0,0}, {1,0}, {2,0}, {3,0}, {4,0}, {5,0}},
-    {{0,1}, {1,1}, {2,1}, {3,1}, {4,1}, {5,1}},
-    {{0,2}, {1,2}, {2,2}, {3,2}, {4,2}, {5,2}},
-    {{0,3}, {1,3}, {2,3}, {3,3}, {4,3}, {5,3}},
-    {{0,4}, {1,4}, {2,4}, {3,4}, {4,4}, {5,4}},
-};
-#endif
+int home_layer = _QWERTY;
 
 enum custom_keycodes {
    QWERTY = SAFE_RANGE,
@@ -58,7 +40,9 @@ enum custom_keycodes {
    SAY_XD,
    SAY_EH,
    SAY_BRB,
+   SAY_OH,
    SAY_DARN,
+   SAY_YEET,
 };
 
 #ifdef TAP_DANCE
@@ -132,67 +116,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-  [_LOCKED1] = LAYOUT(
-  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     RGB_M_SW, RGB_M_SN, RGB_M_B, RGB_M_X, RGB_M_R, RGB_M_G,                           RGB_M_G, RGB_M_R, RGB_M_X, RGB_M_B, RGB_M_SN, RGB_M_SW,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-    RGB_M_SW, RGB_M_SN, RGB_M_B, RGB_M_X,MO(_LOCKED2),RGB_M_G,                         RGB_M_G, RGB_M_R, RGB_M_X, RGB_M_B, RGB_M_SN, RGB_M_SW,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     RGB_M_SW, RGB_M_SN, RGB_M_B, RGB_M_X, RGB_M_R, RGB_M_G,                           RGB_M_G, RGB_M_R, RGB_M_X, RGB_M_B, RGB_M_SN, RGB_M_SW,
-  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     RGB_M_SW, RGB_M_SN, RGB_M_B, RGB_M_X, RGB_M_R, RGB_M_G, XXXXXXX,        XXXXXXX, RGB_M_G, RGB_M_R, RGB_M_X, RGB_M_B, RGB_M_SN, RGB_M_SW,
-  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    RGB_M_K, RGB_M_X, RGB_M_R,                   RGB_M_R, RGB_M_X, RGB_M_K
-                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  ),
-
-  [_LOCKED2] = LAYOUT(
-  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, MO(_LOCKED3), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
-                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  ),
-
-  [_LOCKED3] = LAYOUT(
-  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    XXXXXXX, XXXXXXX, MO(_LOCKED4),              XXXXXXX, XXXXXXX, XXXXXXX
-                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  ),
-
-  [_LOCKED4] = LAYOUT(
-  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    XXXXXXX, XXXXXXX, XXXXXXX,               DF(_QWERTY),DF(_WORKMAN),XXXXXXX
-                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
-  ),
-
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-      KC_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  TO(_WORKMAN),
+      KC_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   WORKMAN,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-      KC_MINS,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                              KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,   KC_BSLS,
+      KC_MINS,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                              KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,    KC_BSLS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
       KC_EQL,   KC_A,    KC_S,    KC_D,    KC_F,   KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,   SFT_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -204,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_WORKMAN] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-      KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   TO(_QWERTY),
+      KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   QWERTY,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_MINS,  KC_Q,    KC_D,    KC_R ,   KC_W,   KC_BSLS,                             KC_J,    KC_F,    KC_U,    KC_P,   KC_SCLN, KC_BSLS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -232,13 +160,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_WASD] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-      KC_ESC, XXXXXXX,  KC_1,     KC_2,    KC_3,    KC_4,                              XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      KC_ESC, XXXXXXX,  KC_1,     KC_2,    KC_3,    KC_4,                             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, XXXXXXX,  KC_Q,     KC_W,    KC_E,    KC_R,                              XXXXXXX,SAY_BOOM, SAY_NS, SAY_OOPS, XXXXXXX, XXXXXXX,
+     XXXXXXX, XXXXXXX,  KC_Q,     KC_W,    KC_E,    KC_R,                            SAY_YEET, SAY_BOOM, SAY_NS, SAY_OOPS, SAY_EH, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, XXXXXXX,  KC_A,     KC_S,    KC_D,    KC_F,                              XXXXXXX, SAY_GG,  SAY_WP, SAY_LOL,  SAY_GTG, XXXXXXX,
+     XXXXXXX, XXXXXXX,  KC_A,     KC_S,    KC_D,    KC_F,                             XXXXXXX,  SAY_GG,  SAY_WP, SAY_LOL,  SAY_GTG, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, SAY_GGS, XXXXXXX, SAY_XD,  XXXXXXX, XXXXXXX,
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, SAY_GGS,  SAY_OH, SAY_XD,   SAY_BRB, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     KC_LCTL,  KC_SPC,  KC_TAB,                   KC_LSFT, TG(_WASD), XXXXXXX
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -286,6 +214,62 @@ TG(_NUMBERS_L),XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
+  [_LOCKED1] = LAYOUT(
+  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
+     RGB_M_SW, RGB_M_SN, RGB_M_B, RGB_M_X, RGB_M_R, RGB_M_G,                          RGB_M_G, RGB_M_R, RGB_M_X, RGB_M_B, RGB_M_SN, RGB_M_SW,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+    RGB_M_SW, RGB_M_SN, RGB_M_B, RGB_M_X,MO(_LOCKED2),RGB_M_G,                        RGB_M_G, RGB_M_R, RGB_M_X, RGB_M_B, RGB_M_SN, RGB_M_SW,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     RGB_M_SW, RGB_M_SN, RGB_M_B, RGB_M_X, RGB_M_R, RGB_M_G,                          RGB_M_G, RGB_M_R, RGB_M_X, RGB_M_B, RGB_M_SN, RGB_M_SW,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     RGB_M_SW, RGB_M_SN, RGB_M_B, RGB_M_X, RGB_M_R, RGB_M_G, XXXXXXX,        XXXXXXX, RGB_M_G, RGB_M_R, RGB_M_X, RGB_M_B, RGB_M_SN, RGB_M_SW,
+  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
+                                    RGB_M_K, RGB_M_X, RGB_M_R,                   RGB_M_R, RGB_M_X, RGB_M_K
+                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+  ),
+
+  [_LOCKED2] = LAYOUT(
+  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, MO(_LOCKED3), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
+                                    XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
+                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+  ),
+
+  [_LOCKED3] = LAYOUT(
+  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
+                                    XXXXXXX, XXXXXXX, MO(_LOCKED4),              XXXXXXX, XXXXXXX, XXXXXXX
+                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+  ),
+
+  [_LOCKED4] = LAYOUT(
+  //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
+                                    XXXXXXX, XXXXXXX, XXXXXXX,               TO(_QWERTY),TO(_WORKMAN),XXXXXXX
+                                // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
+  ),
+
   [_LOWER] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_ESC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
@@ -294,7 +278,7 @@ TG(_NUMBERS_L),XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      SHIFT,   KC_LSFT, KC_LCTL, KC_LGUI, KC_LALT, KC_MPLY,                            KC_MPLY, KC_HOME,  KC_PGDN, KC_END, XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, SH_OFF,  SH_ON,   KC_MEH,  KC_HYPR, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+     XXXXXXX, SH_TG,  SH_TG,   KC_MEH,  KC_HYPR, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, MO(_MODS)
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -308,7 +292,7 @@ TG(_NUMBERS_L),XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_CAPS,  KC_F5,   KC_F6,   KC_F7,   KC_F8,  XXXXXXX,                            KC_MPLY, KC_RALT, KC_RGUI, KC_RCTL, KC_RSFT, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX,  KC_F9,   KC_F10,  KC_F11,  KC_F12, XXXXXXX,  XXXXXXX,         XXXXXXX, XXXXXXX, KC_HYPR, KC_MEH,  SH_ON,   SH_OFF, XXXXXXX,
+     XXXXXXX,  KC_F9,   KC_F10,  KC_F11,  KC_F12, XXXXXXX,  XXXXXXX,         XXXXXXX, XXXXXXX, KC_HYPR, KC_MEH,  SH_TG,   SH_TG, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                    MO(_MODS), KC_LCTL, KC_LALT,                 XXXXXXX, XXXXXXX, XXXXXXX
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -332,6 +316,16 @@ XXXXXXX,TO(_QWERTY),TO(_WORKMAN),XXXXXXX, RGB_TOG, XXXXXXX,                     
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    if(record->event.pressed){
       switch (keycode) {
+         case QWERTY:
+            home_layer = _QWERTY;
+            layer_move(_QWERTY);
+            return false;
+            break;
+         case WORKMAN:
+            home_layer = WORKMAN;
+            layer_move(_WORKMAN);
+            return false;
+            break;
          case SHIFT:
             if(get_mods() & MOD_MASK_SHIFT){
                del_mods(MOD_MASK_SHIFT);
@@ -392,6 +386,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             tap_code(KC_ENT);
             return false;
             break;
+         case SAY_BRB:
+            tap_code(KC_ENT);
+            SEND_STRING("brb");
+            tap_code(KC_ENT);
+            return false;
+            break;
+         case SAY_OH:
+            tap_code(KC_ENT);
+            SEND_STRING(":O");
+            tap_code(KC_ENT);
+            return false;
+            break;
+         case SAY_EH:
+            tap_code(KC_ENT);
+            SEND_STRING(":/");
+            tap_code(KC_ENT);
+            return false;
+            break;
          case SAY_XD:
             tap_code(KC_ENT);
             unregister_code(KC_LSFT);
@@ -399,8 +411,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             tap_code(KC_ENT);
             return false;
             break;
-         case QWERTY:
-            return false;
       }
    }
    return true;
@@ -411,6 +421,15 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
    if (index == 0) {
       // Left encoder
       switch (biton32(layer_state)) {
+         case _LOCKED1:
+         case _LOCKED2:
+         case _LOCKED3:
+         case _LOCKED4:
+            if (clockwise)
+               rgblight_step_noeeprom();
+            else
+               rgblight_step_reverse_noeeprom();
+            break;
          case _NAVI:
             if (clockwise)
                tap_code(KC_WH_L);
@@ -431,20 +450,21 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             } else {
                tap_code(KC_UP);
             }
-         case _LOCKED1:
-         case _LOCKED2:
-         case _LOCKED3:
-         case _LOCKED4:
-            if (clockwise)
-               rgblight_step_noeeprom();
-            else
-               rgblight_step_reverse_noeeprom();
             break;
       }
     }
     else if (index == 1) {
       // Right encoder
       switch (biton32(layer_state)) {
+         case _LOCKED1:
+         case _LOCKED2:
+         case _LOCKED3:
+         case _LOCKED4:
+            if (clockwise)
+               rgblight_increase_hue_noeeprom();
+            else
+               rgblight_decrease_hue_noeeprom();
+            break;
          case _NAVI:
             if (clockwise)
                tap_code(KC_WH_D);
@@ -465,15 +485,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             } else {
                tap_code(KC_LEFT);
             }
-            break;
-         case _LOCKED1:
-         case _LOCKED2:
-         case _LOCKED3:
-         case _LOCKED4:
-            if (clockwise)
-               rgblight_increase_hue_noeeprom();
-            else
-               rgblight_decrease_hue_noeeprom();
             break;
       }
     }
