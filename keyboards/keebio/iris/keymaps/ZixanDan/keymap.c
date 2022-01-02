@@ -17,9 +17,26 @@ enum layer_names {
    _MODS,
 };
 
-#define hand_swap_config
 bool leading = false;
-int target = -1;
+
+#ifdef SWAP_HANDS_ENABLE
+__attribute__ ((weak))
+// swap-hands action needs a matrix to define the swap
+const keypos_t SH_ON_config[MATRIX_ROWS][MATRIX_COLS] = {
+    /* Left hand, matrix positions */
+    {{0,5}, {1,5}, {2,5}, {3,5}, {4,5}, {5,5}},
+    {{0,6}, {1,6}, {2,6}, {3,6}, {4,6}, {5,6}},
+    {{0,7}, {1,7}, {2,7}, {3,7}, {4,7}, {5,7}},
+    {{0,8}, {1,8}, {2,8}, {3,8}, {4,8}, {5,8}},
+    {{0,9}, {1,9}, {2,9}, {3,9}, {4,9}, {5,9}},
+    /* Right hand, matrix positions */
+    {{0,0}, {1,0}, {2,0}, {3,0}, {4,0}, {5,0}},
+    {{0,1}, {1,1}, {2,1}, {3,1}, {4,1}, {5,1}},
+    {{0,2}, {1,2}, {2,2}, {3,2}, {4,2}, {5,2}},
+    {{0,3}, {1,3}, {2,3}, {3,3}, {4,3}, {5,3}},
+    {{0,4}, {1,4}, {2,4}, {3,4}, {4,4}, {5,4}},
+};
+#endif
 
 enum custom_keycodes {
    QWERTY = SAFE_RANGE,
@@ -39,6 +56,9 @@ enum custom_keycodes {
    SAY_OOPS,
    SAY_LOL,
    SAY_XD,
+   SAY_EH,
+   SAY_BRB,
+   SAY_DARN,
 };
 
 #ifdef TAP_DANCE
@@ -164,7 +184,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    XXXXXXX, XXXXXXX, XXXXXXX,               TO(_QWERTY),TO(_WORKMAN),XXXXXXX
+                                    XXXXXXX, XXXXXXX, XXXXXXX,               DF(_QWERTY),DF(_WORKMAN),XXXXXXX
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -188,7 +208,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_MINS,  KC_Q,    KC_D,    KC_R ,   KC_W,   KC_BSLS,                             KC_J,    KC_F,    KC_U,    KC_P,   KC_SCLN, KC_BSLS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-      KC_EQL,  KC_A,    KC_I,    KC_H,    KC_T,    KC_G,                               KC_H,    KC_N,    KC_E,    KC_O,    KC_I,  KC_QUOT,
+      KC_EQL,  KC_A,    KC_I,    KC_H,    KC_T,    KC_G,                               KC_H,    KC_N,    KC_E,    KC_O,    KC_I,   KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
       KC_LBRC, KC_Z,    KC_X,    KC_M,    KC_C,    KC_V,   XXXXXXX,          XXXXXXX,  KC_K,    KC_L,   KC_COMM, KC_DOT,  KC_SLSH, KC_RBRC,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -198,9 +218,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_CHORDS] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-      KC_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                             KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  TO(_LOCKED1),
+      KC_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  TO(_LOCKED1),
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-      KC_MINS,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                              KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,   KC_BSLS,
+      KC_MINS,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,   KC_BSLS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
       KC_EQL,   KC_A,    KC_S,    KC_D,    KC_F,   KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,   SFT_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -220,7 +240,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, SAY_GGS, XXXXXXX, SAY_XD,  XXXXXXX, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LCTL, _______, _______,                   KC_LSFT, TG(_WASD), XXXXXXX
+                                    KC_LCTL,  KC_SPC,  KC_TAB,                   KC_LSFT, TG(_WASD), XXXXXXX
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -234,7 +254,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,   XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LCTL, _______, _______,                   KC_LSFT, TG(_MOBA), XXXXXXX
+                                    KC_LCTL,  KC_SPC,  KC_TAB,                   KC_LSFT, TG(_MOBA), XXXXXXX
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -248,7 +268,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, KC_HOME, KC_PGUP, KC_PGDN, KC_END,  XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, _______,                   KC_BTN2, KC_BTN1, _______
+                                    MO(_LOWER), KC_SPC, KC_TAB,                   KC_BTN2, KC_BTN1, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -262,7 +282,7 @@ TG(_NUMBERS_L),XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,   KC_0,   KC_1,   KC_2,    KC_3,    KC_PDOT, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, _______,                   _______, _______, _______
+                                    MO(_LOWER), KC_SPC, KC_TAB,                  KC_BSPC, KC_ENT, MO(_RAISE)
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -288,7 +308,7 @@ TG(_NUMBERS_L),XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_CAPS,  KC_F5,   KC_F6,   KC_F7,   KC_F8,  XXXXXXX,                            KC_MPLY, KC_RALT, KC_RGUI, KC_RCTL, KC_RSFT, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX,  KC_F9,   KC_F10,  KC_F11,  KC_F12, XXXXXXX,  XXXXXXX,         XXXXXXX, XXXXXXX, KC_HYPR, KC_MEH,  SH_ON,   SH_OFF,  XXXXXXX,
+     XXXXXXX,  KC_F9,   KC_F10,  KC_F11,  KC_F12, XXXXXXX,  XXXXXXX,         XXXXXXX, XXXXXXX, KC_HYPR, KC_MEH,  SH_ON,   SH_OFF, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                    MO(_MODS), KC_LCTL, KC_LALT,                 XXXXXXX, XXXXXXX, XXXXXXX
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -391,6 +411,26 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
    if (index == 0) {
       // Left encoder
       switch (biton32(layer_state)) {
+         case _NAVI:
+            if (clockwise)
+               tap_code(KC_WH_L);
+            else
+               tap_code(KC_WH_R);
+            break;
+         case _QWERTY:
+         case _WORKMAN:
+         case _CHORDS:
+         case _WASD:
+         case _MOBA:
+         case _NUMBERS_L:
+         case _LOWER:
+         case _RAISE:
+         case _MODS:
+            if (clockwise) {
+               tap_code(KC_DOWN);
+            } else {
+               tap_code(KC_UP);
+            }
          case _LOCKED1:
          case _LOCKED2:
          case _LOCKED3:
@@ -400,23 +440,32 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             else
                rgblight_step_reverse_noeeprom();
             break;
-         case _NAVI:
-            if (clockwise)
-               tap_code(KC_WH_L);
-            else
-               tap_code(KC_WH_R);
-            break;
-         default:
-            if (clockwise) {
-               tap_code(KC_DOWN);
-            } else {
-               tap_code(KC_UP);
-            }
       }
     }
     else if (index == 1) {
       // Right encoder
       switch (biton32(layer_state)) {
+         case _NAVI:
+            if (clockwise)
+               tap_code(KC_WH_D);
+            else
+               tap_code(KC_WH_U);
+            break;
+         case _QWERTY:
+         case _WORKMAN:
+         case _CHORDS:
+         case _WASD:
+         case _MOBA:
+         case _NUMBERS_L:
+         case _LOWER:
+         case _RAISE:
+         case _MODS:
+            if (clockwise) {
+               tap_code(KC_RIGHT);
+            } else {
+               tap_code(KC_LEFT);
+            }
+            break;
          case _LOCKED1:
          case _LOCKED2:
          case _LOCKED3:
@@ -425,19 +474,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                rgblight_increase_hue_noeeprom();
             else
                rgblight_decrease_hue_noeeprom();
-            break;
-         case _NAVI:
-            if (clockwise)
-               tap_code(KC_WH_D);
-            else
-               tap_code(KC_WH_U);
-            break;
-         default:
-            if (clockwise) {
-               tap_code(KC_RIGHT);
-            } else {
-               tap_code(KC_LEFT);
-            }
             break;
       }
     }
