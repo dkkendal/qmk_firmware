@@ -43,6 +43,7 @@ enum custom_keycodes {
    SAY_XD,
 };
 
+#ifdef TAP_DANCE
 typedef enum {
    TD_NONE,
    TD_UNKNOWN,
@@ -81,6 +82,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
    [F_LEFT] = ACTION_TAP_DANCE_DOUBLE(KC_F, KC_LEFT),
    [U_RIGHT] = ACTION_TAP_DANCE_DOUBLE(KC_U, KC_RIGHT),
 };
+#endif
 
 #define TD_WH TD(W_HOME)
 #define TD_OE TD(O_END)
@@ -206,7 +208,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
       KC_LBRC,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   XXXXXXX,         XXXXXXX,  KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, KC_RBRC,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                   MO(_LEFTY2), KC_SPC, MO(_LEFTY3),            MO(_LEFTY3), KC_SPC, MO(_LEFTY2),
+                                   MO(_LEFTY2), KC_SPC, MO(_LEFTY3),            MO(_LEFTY3), KC_SPC, MO(_LEFTY2)
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
