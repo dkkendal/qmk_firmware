@@ -86,6 +86,26 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 };
 #endif
 
+const keypos_t PROGMEM hand_swap_config[MATRIX_ROWS][MATRIX_COLS] = {
+   {{5, 0}, {4, 0}, {3, 0}, {2, 0}, {1, 0}, {0, 0}},
+   {{5, 1}, {4, 1}, {3, 1}, {2, 1}, {1, 1}, {0, 1}},
+   {{5, 2}, {4, 2}, {3, 2}, {2, 2}, {1, 2}, {0, 2}},
+   {{5, 3}, {4, 3}, {3, 3}, {2, 3}, {1, 3}, {0, 3}},
+   {{5, 4}, {4, 4}, {3, 4}, {2, 4}, {1, 4}, {0, 4}},
+   {{5, 5}, {4, 5}, {3, 5}, {2, 5}, {1, 5}, {0, 5}},
+   {{5, 6}, {4, 6}, {3, 6}, {2, 6}, {1, 6}, {0, 6}},
+   {{5, 7}, {4, 7}, {3, 7}, {2, 7}, {1, 7}, {0, 7}},
+   {{5, 8}, {4, 8}, {3, 8}, {2, 8}, {1, 8}, {0, 8}},
+   {{5, 9}, {4, 9}, {3, 9}, {2, 9}, {1, 9}, {0, 9}},
+};
+
+#ifdef COMBO
+const uint16_t PROGMEM ZXCV_combo[] = {KC_Z, KC_X, KC_C, KC_V, COMBO_END};
+combo_t key_combos[COMBO_COUNT] = {
+  COMBO(ZXCV_combo, SH_OS)
+};
+#endif
+
 #define TD_WH TD(W_HOME)
 #define TD_OE TD(O_END)
 #define TD_EU TD(E_UP)
@@ -120,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
       KC_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   WORKMAN,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-      KC_MINS,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                              KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,    KC_BSLS,
+      KC_MINS,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
       KC_EQL,   KC_A,    KC_S,    KC_D,    KC_F,   KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,   SFT_SCLN, KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -136,7 +156,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_MINS,  KC_Q,    KC_D,    KC_R ,   KC_W,   KC_BSLS,                             KC_J,    KC_F,    KC_U,    KC_P,   KC_SCLN, KC_BSLS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-      KC_EQL,  KC_A,    KC_I,    KC_H,    KC_T,    KC_G,                               KC_H,    KC_N,    KC_E,    KC_O,    KC_I,   KC_QUOT,
+      KC_EQL,  KC_A,    KC_I,    KC_H,    KC_T,    KC_G,                               KC_H,    KC_N,    KC_E,    KC_O,   SFT_I,   KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
       KC_LBRC, KC_Z,    KC_X,    KC_M,    KC_C,    KC_V,   XXXXXXX,          XXXXXXX,  KC_K,    KC_L,   KC_COMM, KC_DOT,  KC_SLSH, KC_RBRC,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -146,13 +166,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_CHORDS] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-      KC_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  TO(_LOCKED1),
+      KC_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  TG(_CHORDS),
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-      KC_MINS,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,   KC_BSLS,
+      KC_MINS, _______, _______, _______, _______, _______,                           _______, _______, _______, _______, _______,  KC_BSLS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-      KC_EQL,   KC_A,    KC_S,    KC_D,    KC_F,   KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,   SFT_SCLN, KC_QUOT,
+      KC_EQL,  _______, _______, _______, _______, _______,                           _______, _______, _______, _______, _______,  KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-      KC_LBRC,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   XXXXXXX,         XXXXXXX,  KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, KC_RBRC,
+      KC_LBRC, _______, _______, _______, _______, _______, XXXXXXX,         XXXXXXX, _______, _______, _______, _______, _______,  KC_RBRC,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                    MO(_LOWER), KC_SPC, KC_TAB,                   KC_BSPC, KC_ENT, MO(_RAISE)
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
@@ -196,7 +216,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, KC_HOME, KC_PGUP, KC_PGDN, KC_END,  XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    MO(_LOWER), KC_SPC, KC_TAB,                   KC_BTN2, KC_BTN1, _______
+                                    MO(_LOWER), KC_SPC, KC_TAB,                  KC_BTN2, KC_BTN1, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -216,15 +236,15 @@ TG(_NUMBERS_L),XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      
 
   [_LOCKED1] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     RGB_M_SW, RGB_M_SN, RGB_M_B, RGB_M_X, RGB_M_R, RGB_M_G,                          RGB_M_G, RGB_M_R, RGB_M_X, RGB_M_B, RGB_M_SN, RGB_M_SW,
+     RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN,                      RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-    RGB_M_SW, RGB_M_SN, RGB_M_B, RGB_M_X,MO(_LOCKED2),RGB_M_G,                        RGB_M_G, RGB_M_R, RGB_M_X, RGB_M_B, RGB_M_SN, RGB_M_SW,
+    RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN,MO(_LOCKED2),RGB_M_SN,                     RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     RGB_M_SW, RGB_M_SN, RGB_M_B, RGB_M_X, RGB_M_R, RGB_M_G,                          RGB_M_G, RGB_M_R, RGB_M_X, RGB_M_B, RGB_M_SN, RGB_M_SW,
+     RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN,                      RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     RGB_M_SW, RGB_M_SN, RGB_M_B, RGB_M_X, RGB_M_R, RGB_M_G, XXXXXXX,        XXXXXXX, RGB_M_G, RGB_M_R, RGB_M_X, RGB_M_B, RGB_M_SN, RGB_M_SW,
+     RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, XXXXXXX,    XXXXXXX, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    RGB_M_K, RGB_M_X, RGB_M_R,                   RGB_M_R, RGB_M_X, RGB_M_K
+                                    RGB_M_K, RGB_M_SN, RGB_M_SW,                 RGB_M_SW, RGB_M_SN, RGB_M_K
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -278,9 +298,9 @@ TG(_NUMBERS_L),XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      SHIFT,   KC_LSFT, KC_LCTL, KC_LGUI, KC_LALT, KC_MPLY,                            KC_MPLY, KC_HOME,  KC_PGDN, KC_END, XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX, SH_TG,  SH_TG,   KC_MEH,  KC_HYPR, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+     XXXXXXX,  SH_TG,  SH_TG,   KC_MEH,  KC_HYPR, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, MO(_MODS)
+                                    XXXXXXX, XXXXXXX, XXXXXXX,                   KC_BSPC, XXXXXXX, MO(_MODS)
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
  
@@ -491,3 +511,15 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     return true;
 }
 #endif
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+    case _CHORDS:
+        combo_enable();
+        break;
+    default: //  for any other layers, or the default layer
+        combo_disable();
+        break;
+    }
+  return state;
+}

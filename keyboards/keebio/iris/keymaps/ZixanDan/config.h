@@ -22,6 +22,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
 #define NO_DEBUG
-#define RGBLIGHT_ANIMATIONS
+#define RGBLIGHT_EFFECT_SNAKE
+#define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+
+#define COMBO_COUNT 1
 
 #define LEADER_TIMEOUT 300
