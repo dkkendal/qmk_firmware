@@ -1,0 +1,1 @@
+Personal keymap for an Iris split keyboard I got from keeb.io with two rotary encoders.
