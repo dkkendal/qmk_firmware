@@ -38,16 +38,6 @@ int rgb_mode = RGBLIGHT_MODE_SNAKE;
 enum custom_keycodes {
    QWERTY = SAFE_RANGE,
    WORKMAN,
-   SINGLE1,
-   SINGLE2,
-   SINGLE3,
-   SINGLE4,
-   SINGLE5,
-   SINGLEQ1,
-   SINGLEQ2,
-   SINGLEQ3,
-   SINGLEQ4,
-   SINGLEQ5,
    WASD,
    LOWER,
    RAISE,
@@ -139,6 +129,16 @@ combo_t key_combos[COMBO_COUNT] = {
 #define SINGQ2_CTL LM(_SINGLE2, MOD_LCTL)
 #define SINGQ2_ALT LM(_SINGLE2, MOD_LALT)
 #define SINGQ2_GUI LM(_SINGLE2, MOD_LGUI)
+#define SINGLE1 TO(_SINGLE1)
+#define SINGLE2 TO(_SINGLE2)
+#define SINGLE3 TO(_SINGLE3)
+#define SINGLE4 TO(_SINGLE4)
+#define SINGLE5 TO(_SINGLE5)
+#define SINGLEQ1 TO(_SINGLEQ1)
+#define SINGLEQ2 TO(_SINGLEQ2)
+#define SINGLEQ3 TO(_SINGLEQ3)
+#define SINGLEQ4 TO(_SINGLEQ4)
+#define SINGLEQ5 TO(_SINGLEQ5)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -486,56 +486,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
          case WORKMAN:
             // home_layer = _WORKMAN;
             layer_move(_WORKMAN);
-            return false;
-            break;
-         case SINGLE1:
-            // home_layer = _SINGLE1;
-            layer_move(_SINGLE1);
-            return false;
-            break;
-         case SINGLE2:
-            // home_layer = _SINGLE2;
-            layer_move(_SINGLE2);
-            return false;
-            break;
-         case SINGLE3:
-            // home_layer = _SINGLE3;
-            layer_move(_SINGLE3);
-            return false;
-            break;
-         case SINGLE4:
-            // home_layer = _SINGLE4;
-            layer_move(_SINGLE4);
-            return false;
-            break;
-         case SINGLE5:
-            // home_layer = _SINGLE5;
-            layer_move(_SINGLE5);
-            return false;
-            break;
-         case SINGLEQ1:
-            // home_layer = _SINGLEQ1;
-            layer_move(_SINGLEQ1);
-            return false;
-            break;
-         case SINGLEQ2:
-            // home_layer = _SINGLEQ2;
-            layer_move(_SINGLEQ2);
-            return false;
-            break;
-         case SINGLEQ3:
-            // home_layer = _SINGLEQ3;
-            layer_move(_SINGLEQ3);
-            return false;
-            break;
-         case SINGLEQ4:
-            // home_layer = _SINGLEQ4;
-            layer_move(_SINGLEQ4);
-            return false;
-            break;
-         case SINGLEQ5:
-            // home_layer = _SINGLEQ5;
-            layer_move(_SINGLEQ5);
             return false;
             break;
          case SHIFT:
