@@ -3,11 +3,11 @@
 enum layer_names {
    _QWERTY,
    _WORKMAN,
-   // _SINGLE4, // These two layers are ordered this way intentionally
-   // _SINGLE5, // These two layers are ordered this way intentionally
-   // _SINGLE1,
-   // _SINGLE2,
-   // _SINGLE3,
+   _SINGLE4, // These two layers are ordered this way intentionally
+   _SINGLE5, // These two layers are ordered this way intentionally
+   _SINGLE1,
+   _SINGLE2,
+   _SINGLE3,
    _SINGLEQ4, // These two layers are ordered this way intentionally
    _SINGLEQ5, // These two layers are ordered this way intentionally
    _SINGLEQ1,
@@ -36,7 +36,24 @@ int rgb_mode = RGBLIGHT_MODE_SNAKE;
 
 
 enum custom_keycodes {
-   SHIFT = SAFE_RANGE,
+   QWERTY = SAFE_RANGE,
+   WORKMAN,
+   SINGLE1,
+   SINGLE2,
+   SINGLE3,
+   SINGLE4,
+   SINGLE5,
+   SINGLEQ1,
+   SINGLEQ2,
+   SINGLEQ3,
+   SINGLEQ4,
+   SINGLEQ5,
+   WASD,
+   LOWER,
+   RAISE,
+   NAVI,
+   NUMBERS_L,
+   SHIFT,
    SAY_BOOM,
    SAY_GG,
    SAY_GGS,
@@ -75,18 +92,18 @@ qk_tap_dance_action_t tap_dance_actions[] = {
    [_TAB_TALK] = ACTION_TAP_DANCE_DOUBLE(KC_TAB, C(KC_BSLS)),
 };
 
-// const keypos_t PROGMEM hand_swap_config[MATRIX_ROWS][MATRIX_COLS] = {
-//    {{5, 0}, {4, 0}, {3, 0}, {2, 0}, {1, 0}, {0, 0}},
-//    {{5, 1}, {4, 1}, {3, 1}, {2, 1}, {1, 1}, {0, 1}},
-//    {{5, 2}, {4, 2}, {3, 2}, {2, 2}, {1, 2}, {0, 2}},
-//    {{5, 3}, {4, 3}, {3, 3}, {2, 3}, {1, 3}, {0, 3}},
-//    {{5, 4}, {4, 4}, {3, 4}, {2, 4}, {1, 4}, {0, 4}},
-//    {{5, 5}, {4, 5}, {3, 5}, {2, 5}, {1, 5}, {0, 5}},
-//    {{5, 6}, {4, 6}, {3, 6}, {2, 6}, {1, 6}, {0, 6}},
-//    {{5, 7}, {4, 7}, {3, 7}, {2, 7}, {1, 7}, {0, 7}},
-//    {{5, 8}, {4, 8}, {3, 8}, {2, 8}, {1, 8}, {0, 8}},
-//    {{5, 9}, {4, 9}, {3, 9}, {2, 9}, {1, 9}, {0, 9}},
-// };
+const keypos_t PROGMEM hand_swap_config[MATRIX_ROWS][MATRIX_COLS] = {
+   {{5, 0}, {4, 0}, {3, 0}, {2, 0}, {1, 0}, {0, 0}},
+   {{5, 1}, {4, 1}, {3, 1}, {2, 1}, {1, 1}, {0, 1}},
+   {{5, 2}, {4, 2}, {3, 2}, {2, 2}, {1, 2}, {0, 2}},
+   {{5, 3}, {4, 3}, {3, 3}, {2, 3}, {1, 3}, {0, 3}},
+   {{5, 4}, {4, 4}, {3, 4}, {2, 4}, {1, 4}, {0, 4}},
+   {{5, 5}, {4, 5}, {3, 5}, {2, 5}, {1, 5}, {0, 5}},
+   {{5, 6}, {4, 6}, {3, 6}, {2, 6}, {1, 6}, {0, 6}},
+   {{5, 7}, {4, 7}, {3, 7}, {2, 7}, {1, 7}, {0, 7}},
+   {{5, 8}, {4, 8}, {3, 8}, {2, 8}, {1, 8}, {0, 8}},
+   {{5, 9}, {4, 9}, {3, 9}, {2, 9}, {1, 9}, {0, 9}},
+};
 
 #ifdef COMBO
 const uint16_t PROGMEM ZXCV_combo[] = {KC_Z, KC_X, KC_C, KC_V, COMBO_END};
@@ -104,42 +121,24 @@ combo_t key_combos[COMBO_COUNT] = {
 #define QUOT_SLS TD(_QUOT_SLS)
 #define TAB_TALK TD(_TAB_TALK)
 
-#define QWERTY TO(_QWERTY)
-#define WORKMAN TO(_WORKMAN)
-#define WASD TO(_WASD)
-#define MOBA TO(_MOBA)
-#define LOWER TO(_LOWER)
-#define RAISE TO(_RAISE)
-#define NAVI TO(_NAVI)
-#define NUMBERS_L TO(_NUMBERS_L)
 #define SFT_SCLN RSFT_T(KC_SCLN)
 #define SFT_I RSFT_T(KC_I)
 #define SHIFTY OSM(MOD_LSFT)
 #define CTLY OSM(MOD_LCTL)
 #define ALTY OSM(MOD_LALT)
 #define WINY OSM(MOD_LGUI)
-// #define SING1_CTL LM(_SINGLE1, MOD_LCTL)
-// #define SING1_ALT LM(_SINGLE1, MOD_LALT)
-// #define SING1_GUI LM(_SINGLE1, MOD_LGUI)
-// #define SING2_CTL LM(_SINGLE2, MOD_LCTL)
-// #define SING2_ALT LM(_SINGLE2, MOD_LALT)
-// #define SING2_GUI LM(_SINGLE2, MOD_LGUI)
-// #define SINGLE1 TO(_SINGLE1)
-// #define SINGLE2 TO(_SINGLE2)
-// #define SINGLE3 TO(_SINGLE3)
-// #define SINGLE4 TO(_SINGLE4)
-// #define SINGLE5 TO(_SINGLE5)
-#define SINGQ1_CTL LM(_SINGLEQ1, MOD_LCTL)
-#define SINGQ1_ALT LM(_SINGLEQ1, MOD_LALT)
-#define SINGQ1_GUI LM(_SINGLEQ1, MOD_LGUI)
-#define SINGQ2_CTL LM(_SINGLEQ2, MOD_LCTL)
-#define SINGQ2_ALT LM(_SINGLEQ2, MOD_LALT)
-#define SINGQ2_GUI LM(_SINGLEQ2, MOD_LGUI)
-#define SINGLEQ1 TO(_SINGLEQ1)
-#define SINGLEQ2 TO(_SINGLEQ2)
-#define SINGLEQ3 TO(_SINGLEQ3)
-#define SINGLEQ4 TO(_SINGLEQ4)
-#define SINGLEQ5 TO(_SINGLEQ5)
+#define SING1_CTL LM(_SINGLE1, MOD_LCTL)
+#define SING1_ALT LM(_SINGLE1, MOD_LALT)
+#define SING1_GUI LM(_SINGLE1, MOD_LGUI)
+#define SING2_CTL LM(_SINGLE2, MOD_LCTL)
+#define SING2_ALT LM(_SINGLE2, MOD_LALT)
+#define SING2_GUI LM(_SINGLE2, MOD_LGUI)
+#define SINGQ1_CTL LM(_SINGLE1, MOD_LCTL)
+#define SINGQ1_ALT LM(_SINGLE1, MOD_LALT)
+#define SINGQ1_GUI LM(_SINGLE1, MOD_LGUI)
+#define SINGQ2_CTL LM(_SINGLE2, MOD_LCTL)
+#define SINGQ2_ALT LM(_SINGLE2, MOD_LALT)
+#define SINGQ2_GUI LM(_SINGLE2, MOD_LGUI)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -171,80 +170,80 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 
   ),
 
-//    // base layer for one-handed typing
-//   [_SINGLE1] = LAYOUT(
+   // base layer for one-handed typing
+  [_SINGLE1] = LAYOUT(
   
-//       GR_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    GR_ESC,
+      GR_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    GR_ESC,
   
-//       MIN_EQS,  KC_T,    KC_H,    KC_E,    KC_R,    KC_S,                              KC_S,    KC_R,    KC_E,    KC_H,    KC_T,    MIN_EQS,
+      MIN_EQS,  KC_T,    KC_H,    KC_E,    KC_R,    KC_S,                              KC_S,    KC_R,    KC_E,    KC_H,    KC_T,    MIN_EQS,
   
-//       SHIFTY,   KC_U,    KC_A,    KC_I,    KC_O,    KC_N,                              KC_N,    KC_O,    KC_I,    KC_A,    KC_U,    SHIFTY,
+      SHIFTY,   KC_U,    KC_A,    KC_I,    KC_O,    KC_N,                              KC_N,    KC_O,    KC_I,    KC_A,    KC_U,    SHIFTY,
   
-//       BS_DEL,   KC_L,    KC_D,    KC_C,    KC_M,    KC_F,  XXXXXXX,          XXXXXXX,  KC_F,    KC_M,    KC_C,    KC_D,    KC_L,    BS_DEL,
+      BS_DEL,   KC_L,    KC_D,    KC_C,    KC_M,    KC_F,  XXXXXXX,          XXXXXXX,  KC_F,    KC_M,    KC_C,    KC_D,    KC_L,    BS_DEL,
   
-//                                  TO(_SINGLE2),SP_ENT,TO(_SINGLE4),             TO(_SINGLE4),SP_ENT,TO(_SINGLE2)
+                                 TO(_SINGLE2),SP_ENT,TO(_SINGLE4),             TO(_SINGLE4),SP_ENT,TO(_SINGLE2)
                                 
-//   ),
+  ),
 
-//    // secondary layer for one-handed typing
-//   [_SINGLE2] = LAYOUT(
+   // secondary layer for one-handed typing
+  [_SINGLE2] = LAYOUT(
   
-//       KC_ESC,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_ESC,
+      KC_ESC,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_ESC,
   
-//      QUOT_SLS,  KC_P,    KC_X,    KC_E,    KC_V,    KC_Y,                              KC_Y,    KC_V,    KC_Q,    KC_X,    KC_P,   QUOT_SLS,
+     QUOT_SLS,  KC_P,    KC_X,    KC_E,    KC_V,    KC_Y,                              KC_Y,    KC_V,    KC_Q,    KC_X,    KC_P,   QUOT_SLS,
   
-//       SHIFTY,   KC_K,    KC_W,    KC_Q,    KC_J,    KC_G,                              KC_G,    KC_J,    KC_E,    KC_W,    KC_K,    SHIFTY,
+      SHIFTY,   KC_K,    KC_W,    KC_Q,    KC_J,    KC_G,                              KC_G,    KC_J,    KC_E,    KC_W,    KC_K,    SHIFTY,
   
-//       LRBRC,    KC_Z,  KC_COMM,  KC_DOT,  KC_SLSH,  KC_B,  XXXXXXX,          XXXXXXX,  KC_B,   KC_SLSH,  KC_DOT, KC_COMM,  KC_Z,    LRBRC,
+      LRBRC,    KC_Z,  KC_COMM,  KC_DOT,  KC_SLSH,  KC_B,  XXXXXXX,          XXXXXXX,  KC_B,   KC_SLSH,  KC_DOT, KC_COMM,  KC_Z,    LRBRC,
   
-//                                  TO(_SINGLE1), KC_SPC, KC_TAB,                    KC_TAB, KC_SPC, TO(_SINGLE1)
+                                 TO(_SINGLE1), KC_SPC, KC_TAB,                    KC_TAB, KC_SPC, TO(_SINGLE1)
                                 
-//   ),
+  ),
 
-//    // macro layer for one-handed typing
-//   [_SINGLE3] = LAYOUT(
+   // macro layer for one-handed typing
+  [_SINGLE3] = LAYOUT(
   
-//      SINGLE1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, SINGLE1,
+     SINGLE1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, SINGLE1,
   
-//      XXXXXXX, C(KC_P),  C(KC_W), C(KC_O), C(KC_R), C(KC_Y),                           C(KC_Y), C(KC_R), C(KC_O), C(KC_W), C(KC_P), XXXXXXX,
+     XXXXXXX, C(KC_P),  C(KC_W), C(KC_O), C(KC_R), C(KC_Y),                           C(KC_Y), C(KC_R), C(KC_O), C(KC_W), C(KC_P), XXXXXXX,
   
-//      XXXXXXX, C(KC_A),  C(KC_S), C(KC_D), C(KC_F), C(KC_H),                           C(KC_H), C(KC_F), C(KC_D), C(KC_S), C(KC_A), XXXXXXX,
+     XXXXXXX, C(KC_A),  C(KC_S), C(KC_D), C(KC_F), C(KC_H),                           C(KC_H), C(KC_F), C(KC_D), C(KC_S), C(KC_A), XXXXXXX,
   
-//      XXXXXXX, C(KC_Z),  C(KC_X), C(KC_C), C(KC_V), C(KC_N), XXXXXXX,         XXXXXXX, C(KC_N), C(KC_V), C(KC_C), C(KC_X), C(KC_Z), XXXXXXX,
+     XXXXXXX, C(KC_Z),  C(KC_X), C(KC_C), C(KC_V), C(KC_N), XXXXXXX,         XXXXXXX, C(KC_N), C(KC_V), C(KC_C), C(KC_X), C(KC_Z), XXXXXXX,
   
-//                                      ALTY,    SHIFTY,   CTLY,                      CTLY,   SHIFTY,   ALTY
+                                     ALTY,    SHIFTY,   CTLY,                      CTLY,   SHIFTY,   ALTY
                                 
-//   ),
+  ),
 
-//    // nav layer for one-handed typing
-//   [_SINGLE4] = LAYOUT(
+   // nav layer for one-handed typing
+  [_SINGLE4] = LAYOUT(
   
-//      XXXXXXX, SINGLE1, SINGLE2, SINGLE3, SINGLE5,  XXXXXXX,                           XXXXXXX, SINGLE5, SINGLE3, SINGLE2, SINGLE1, XXXXXXX,
+     XXXXXXX, SINGLE1, SINGLE2, SINGLE3, SINGLE5,  XXXXXXX,                           XXXXXXX, SINGLE5, SINGLE3, SINGLE2, SINGLE1, XXXXXXX,
   
-//     SING1_CTL, XXXXXXX, KC_END, KC_PGUP, KC_RIGHT, XXXXXXX,                           XXXXXXX, KC_RIGHT, KC_PGUP, KC_END, XXXXXXX, SING1_CTL,
+    SING1_CTL, XXXXXXX, KC_END, KC_PGUP, KC_RIGHT, XXXXXXX,                           XXXXXXX, KC_RIGHT, KC_PGUP, KC_END, XXXXXXX, SING1_CTL,
   
-//     SING1_GUI, XXXXXXX, KC_HOME, KC_PGDN, KC_END, XXXXXXX,                            XXXXXXX,  KC_END, KC_PGDN, KC_HOME, XXXXXXX, SING1_GUI,
+    SING1_GUI, XXXXXXX, KC_HOME, KC_PGDN, KC_END, XXXXXXX,                            XXXXXXX,  KC_END, KC_PGDN, KC_HOME, XXXXXXX, SING1_GUI,
   
-//     SING1_ALT, XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,  KC_TAB, XXXXXXX, XXXXXXX, XXXXXXX, SING1_ALT,
+    SING1_ALT, XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,  KC_TAB, XXXXXXX, XXXXXXX, XXXXXXX, SING1_ALT,
   
-//                                      ALTY,    SHIFTY,   CTLY,                     CTLY,    SHIFTY,   ALTY
+                                     ALTY,    SHIFTY,   CTLY,                     CTLY,    SHIFTY,   ALTY
                                 
-//   ),
+  ),
 
-//    // modifiers layer for one-handed typing
-//   [_SINGLE5] = LAYOUT(
+   // modifiers layer for one-handed typing
+  [_SINGLE5] = LAYOUT(
   
-//    TG(_SINGLE5), KC_1,  KC_2,    KC_3,    KC_4,    KC_5,                               KC_1,    KC_2,    KC_3,    KC_4,    KC_5, TG(_SINGLE5),
+   TG(_SINGLE5), KC_1,  KC_2,    KC_3,    KC_4,    KC_5,                               KC_1,    KC_2,    KC_3,    KC_4,    KC_5, TG(_SINGLE5),
   
-//     SING2_CTL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   WINY,                              WINY,    KC_F4,   KC_F3,   KC_F2,   KC_F1,  SING2_CTL,
+    SING2_CTL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   WINY,                              WINY,    KC_F4,   KC_F3,   KC_F2,   KC_F1,  SING2_CTL,
   
-//     SING2_GUI,  KC_F1,   KC_F2,   KC_F3,   KC_F4,  SHIFTY,                             SHIFTY,  KC_F4,   KC_F3,   KC_F2,   KC_F1,  SING2_GUI,
+    SING2_GUI,  KC_F1,   KC_F2,   KC_F3,   KC_F4,  SHIFTY,                             SHIFTY,  KC_F4,   KC_F3,   KC_F2,   KC_F1,  SING2_GUI,
   
-//     SING2_ALT,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   CTLY,  XXXXXXX,          XXXXXXX,  CTLY,    KC_F4,   KC_F3,   KC_F2,   KC_F1,  SING2_ALT,
+    SING2_ALT,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   CTLY,  XXXXXXX,          XXXXXXX,  CTLY,    KC_F4,   KC_F3,   KC_F2,   KC_F1,  SING2_ALT,
   
-//                                    ALTY,  MO(_MODS), TO(_SINGLE1),           TO(_SINGLE1), MO(_MODS), ALTY
+                                   ALTY,  MO(_MODS), TO(_SINGLE1),           TO(_SINGLE1), MO(_MODS), ALTY
                                 
-//   ),
+  ),
 
    // base layer for one-handed typing
   [_SINGLEQ1] = LAYOUT(
@@ -279,7 +278,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    // macro layer for one-handed typing
   [_SINGLEQ3] = LAYOUT(
   
-     SINGLEQ1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, SINGLEQ1,
+     SINGLE1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, SINGLEQ1,
   
      XXXXXXX, C(KC_P),  C(KC_W), C(KC_O), C(KC_R), C(KC_Y),                           C(KC_Y), C(KC_R), C(KC_O), C(KC_W), C(KC_P), XXXXXXX,
   
@@ -379,15 +378,15 @@ TG(_NUMBERS_L),XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      
 
   [_LOCKED1] = LAYOUT(
   
-     RGB_HUI, RGB_HUD, RGB_HUI, RGB_HUD, RGB_HUI, RGB_HUD,                      RGB_HUD, RGB_HUI, RGB_HUD, RGB_HUI, RGB_HUD, RGB_HUI,
+     RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN,                      RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW,
   
-    RGB_HUI, RGB_HUD, RGB_HUI, RGB_HUD,MO(_LOCKED2),RGB_HUD,                     RGB_HUD, RGB_HUI, RGB_HUD, RGB_HUI, RGB_HUD, RGB_HUI,
+    RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN,MO(_LOCKED2),RGB_M_SN,                     RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW,
   
-     RGB_HUI, RGB_HUD, RGB_HUI, RGB_HUD, RGB_HUI, RGB_HUD,                      RGB_HUD, RGB_HUI, RGB_HUD, RGB_HUI, RGB_HUD, RGB_HUI,
+     RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN,                      RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW,
   
-     RGB_HUI, RGB_HUD, RGB_HUI, RGB_HUD, RGB_HUI, RGB_HUD, XXXXXXX,    XXXXXXX, RGB_HUD, RGB_HUI, RGB_HUD, RGB_HUI, RGB_HUD, RGB_HUI,
+     RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, XXXXXXX,    XXXXXXX, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW, RGB_M_SN, RGB_M_SW,
   
-                                    RGB_M_K, RGB_HUD, RGB_HUI,                 RGB_HUI, RGB_HUD, RGB_M_K
+                                    RGB_M_K, RGB_M_SN, RGB_M_SW,                 RGB_M_SW, RGB_M_SN, RGB_M_K
                                 
   ),
 
@@ -465,11 +464,11 @@ TG(_NUMBERS_L),XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      
   
    TO(_LOCKED1),XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   
-     XXXXXXX,  QWERTY, WORKMAN, SINGLEQ1,  RGB_TOG, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+     XXXXXXX,  QWERTY, WORKMAN, SINGLE1, RGB_TOG, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   
-     XXXXXXX,  NAVI,  NUMBERS_L, WASD,    MOBA,    XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  XXXXXXX,TO(_NAVI),TO(_NUMBERS_L),TO(_WASD),TO(_MOBA),XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   
-     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+     XXXXXXX, XXXXXXX, XXXXXXX, SINGLEQ1, XXXXXXX, XXXXXXX,  XXXXXXX,         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   
                                     XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
                                 
@@ -479,6 +478,75 @@ TG(_NUMBERS_L),XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    if(record->event.pressed){
       switch (keycode) {
+         case QWERTY:
+            // home_layer = _QWERTY;
+            layer_move(_QWERTY);
+            return false;
+            break;
+         case WORKMAN:
+            // home_layer = _WORKMAN;
+            layer_move(_WORKMAN);
+            return false;
+            break;
+         case SINGLE1:
+            // home_layer = _SINGLE1;
+            layer_move(_SINGLE1);
+            return false;
+            break;
+         case SINGLE2:
+            // home_layer = _SINGLE2;
+            layer_move(_SINGLE2);
+            return false;
+            break;
+         case SINGLE3:
+            // home_layer = _SINGLE3;
+            layer_move(_SINGLE3);
+            return false;
+            break;
+         case SINGLE4:
+            // home_layer = _SINGLE4;
+            layer_move(_SINGLE4);
+            return false;
+            break;
+         case SINGLE5:
+            // home_layer = _SINGLE5;
+            layer_move(_SINGLE5);
+            return false;
+            break;
+         case SINGLEQ1:
+            // home_layer = _SINGLEQ1;
+            layer_move(_SINGLEQ1);
+            return false;
+            break;
+         case SINGLEQ2:
+            // home_layer = _SINGLEQ2;
+            layer_move(_SINGLEQ2);
+            return false;
+            break;
+         case SINGLEQ3:
+            // home_layer = _SINGLEQ3;
+            layer_move(_SINGLEQ3);
+            return false;
+            break;
+         case SINGLEQ4:
+            // home_layer = _SINGLEQ4;
+            layer_move(_SINGLEQ4);
+            return false;
+            break;
+         case SINGLEQ5:
+            // home_layer = _SINGLEQ5;
+            layer_move(_SINGLEQ5);
+            return false;
+            break;
+         case SHIFT:
+            if(get_mods() & MOD_MASK_SHIFT){
+               del_mods(MOD_MASK_SHIFT);
+            }
+            else {
+               add_mods(MOD_MASK_SHIFT);
+            }
+            return false;
+            break;
          case SAY_BOOM:
             tap_code(KC_ENT);
             SEND_STRING("boom");
@@ -584,9 +652,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
          case _LOCKED3:
          case _LOCKED4:
             if (clockwise)
-               rgblight_increase_hue_noeeprom();
+               rgblight_step_noeeprom();
             else
-               rgblight_decrease_hue_noeeprom();
+               rgblight_step_reverse_noeeprom();
             break;
          #endif
          case _NAVI:
@@ -621,9 +689,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
          case _LOCKED3:
          case _LOCKED4:
             if (clockwise)
-               rgblight_increase_val_noeeprom();
+               rgblight_increase_hue_noeeprom();
             else
-               rgblight_decrease_val_noeeprom();
+               rgblight_decrease_hue_noeeprom();
             break;
          #endif
          case _NAVI:

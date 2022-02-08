@@ -22,6 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
 #define NO_DEBUG
+#define RGBLIGHT_EFFECT_SNAKE
+#define RGBLIGHT_EFFECT_RAINBOW_MOOD
 
 #define COMBO_COUNT 1
 #define TAPPING_TOGGLE 2
