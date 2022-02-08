@@ -27,5 +27,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define COMBO_COUNT 1
 #define TAPPING_TOGGLE 2
+#define ONESHOT_TAP_TOGGLE 3
 
 #define LEADER_TIMEOUT 300
