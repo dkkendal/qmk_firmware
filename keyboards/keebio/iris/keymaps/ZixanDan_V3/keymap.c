@@ -63,7 +63,6 @@ enum {
    _LRBRC,
    _QUOT_SLS,
    _TAB_TALK,
-   _TAB_L,
 };
 
 //Tap Dance Definitions
@@ -74,28 +73,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
    [_LRBRC] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),
    [_QUOT_SLS] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_BSLS),
    [_TAB_TALK] = ACTION_TAP_DANCE_DOUBLE(KC_TAB, C(KC_BSLS)),
-   [_TAB_L] = ACTION_TAP_DANCE_DOUBLE(KC_TAB, KC_LEAD),
 };
-
-// const keypos_t PROGMEM hand_swap_config[MATRIX_ROWS][MATRIX_COLS] = {
-//    {{5, 0}, {4, 0}, {3, 0}, {2, 0}, {1, 0}, {0, 0}},
-//    {{5, 1}, {4, 1}, {3, 1}, {2, 1}, {1, 1}, {0, 1}},
-//    {{5, 2}, {4, 2}, {3, 2}, {2, 2}, {1, 2}, {0, 2}},
-//    {{5, 3}, {4, 3}, {3, 3}, {2, 3}, {1, 3}, {0, 3}},
-//    {{5, 4}, {4, 4}, {3, 4}, {2, 4}, {1, 4}, {0, 4}},
-//    {{5, 5}, {4, 5}, {3, 5}, {2, 5}, {1, 5}, {0, 5}},
-//    {{5, 6}, {4, 6}, {3, 6}, {2, 6}, {1, 6}, {0, 6}},
-//    {{5, 7}, {4, 7}, {3, 7}, {2, 7}, {1, 7}, {0, 7}},
-//    {{5, 8}, {4, 8}, {3, 8}, {2, 8}, {1, 8}, {0, 8}},
-//    {{5, 9}, {4, 9}, {3, 9}, {2, 9}, {1, 9}, {0, 9}},
-// };
-
-#ifdef COMBO
-const uint16_t PROGMEM ZXCV_combo[] = {KC_Z, KC_X, KC_C, KC_V, COMBO_END};
-combo_t key_combos[COMBO_COUNT] = {
-  COMBO(ZXCV_combo, SH_OS)
-};
-#endif
 
 // tapdance defines
 #define SP_ENT TD(_SP_ENT)
@@ -104,8 +82,8 @@ combo_t key_combos[COMBO_COUNT] = {
 #define LRBRC TD(_LRBRC)
 #define QUOT_SLS TD(_QUOT_SLS)
 #define TAB_TALK TD(_TAB_TALK)
-#define TAB_L TD(_TAB_L)
 
+#define TAB_L LT(_LOWER, KC_TAB)
 #define QWERTY TO(_QWERTY)
 #define WORKMAN TO(_WORKMAN)
 #define WASD TO(_WASD)
@@ -144,6 +122,26 @@ combo_t key_combos[COMBO_COUNT] = {
 #define SINGLEQ4 TO(_SINGLEQ4)
 #define SINGLEQ5 TO(_SINGLEQ5)
 
+// const keypos_t PROGMEM hand_swap_config[MATRIX_ROWS][MATRIX_COLS] = {
+//    {{5, 0}, {4, 0}, {3, 0}, {2, 0}, {1, 0}, {0, 0}},
+//    {{5, 1}, {4, 1}, {3, 1}, {2, 1}, {1, 1}, {0, 1}},
+//    {{5, 2}, {4, 2}, {3, 2}, {2, 2}, {1, 2}, {0, 2}},
+//    {{5, 3}, {4, 3}, {3, 3}, {2, 3}, {1, 3}, {0, 3}},
+//    {{5, 4}, {4, 4}, {3, 4}, {2, 4}, {1, 4}, {0, 4}},
+//    {{5, 5}, {4, 5}, {3, 5}, {2, 5}, {1, 5}, {0, 5}},
+//    {{5, 6}, {4, 6}, {3, 6}, {2, 6}, {1, 6}, {0, 6}},
+//    {{5, 7}, {4, 7}, {3, 7}, {2, 7}, {1, 7}, {0, 7}},
+//    {{5, 8}, {4, 8}, {3, 8}, {2, 8}, {1, 8}, {0, 8}},
+//    {{5, 9}, {4, 9}, {3, 9}, {2, 9}, {1, 9}, {0, 9}},
+// };
+
+#ifdef COMBO
+const uint16_t PROGMEM ZXCV_combo[] = {KC_Z, KC_X, KC_C, KC_V, COMBO_END};
+combo_t key_combos[COMBO_COUNT] = {
+  COMBO(ZXCV_combo, SH_OS)
+};
+#endif
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOCKED] = LAYOUT(
@@ -160,65 +158,65 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 
   ),
 
-   // base layer for one-handed typing
-  [_SINGLEQ1] = LAYOUT(
+//    // base layer for one-handed typing
+//   [_SINGLEQ1] = LAYOUT(
   
-      ESC_GR,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    ESC_GR,
+//       ESC_GR,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    ESC_GR,
   
-      MIN_EQS,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    MIN_EQS,
+//       MIN_EQS,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    MIN_EQS,
   
-      SHIFTY,   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                              KC_H,    KC_J,    KC_K,    KC_L,   SFT_SCLN, SHIFTY,
+//       SHIFTY,   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                              KC_H,    KC_J,    KC_K,    KC_L,   SFT_SCLN, SHIFTY,
   
-      KC_BSPC,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  XXXXXXX,          XXXXXXX,  KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH,   KC_BSPC,
+//       KC_BSPC,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  XXXXXXX,          XXXXXXX,  KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, KC_BSPC,
   
-                                  TO(_SINGLEQ2), SP_ENT, TAB_L,                  TAB_L, SP_ENT, TO(_SINGLEQ2)
+//                                   TO(_SINGLEQ2), SP_ENT, TAB_L,                  TAB_L, SP_ENT, TO(_SINGLEQ2)
                                 
-  ),
+//   ),
 
-   // secondary layer for one-handed typing
-  [_SINGLEQ2] = LAYOUT(
+//    // secondary layer for one-handed typing
+//   [_SINGLEQ2] = LAYOUT(
   
-      KC_ESC,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   KC_ESC,
+//       KC_ESC,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   KC_ESC,
   
-     QUOT_SLS,  KC_P,    KC_O,    KC_I,    KC_U,    KC_Y,                              KC_T,    KC_R,    KC_E,    KC_W,    KC_Q,   QUOT_SLS,
+//      QUOT_SLS,  KC_P,    KC_O,    KC_I,    KC_U,    KC_Y,                              KC_T,    KC_R,    KC_E,    KC_W,    KC_Q,   QUOT_SLS,
   
-      SHIFTY, SFT_SCLN,  KC_L,    KC_K,    KC_J,    KC_H,                              KC_G,    KC_F,    KC_D,    KC_S,    KC_A,   SHIFTY,
+//       SHIFTY, SFT_SCLN,  KC_L,    KC_K,    KC_J,    KC_H,                              KC_G,    KC_F,    KC_D,    KC_S,    KC_A,   SHIFTY,
   
-      LRBRC,   KC_SLSH,  KC_DOT,  KC_COMM, KC_M,    KC_N,  XXXXXXX,          XXXXXXX,  KC_B,    KC_V,    KC_C,    KC_X,    KC_Z,   LRBRC,
+//       LRBRC,   KC_SLSH,  KC_DOT,  KC_COMM, KC_M,    KC_N,  XXXXXXX,          XXXXXXX,  KC_B,    KC_V,    KC_C,    KC_X,    KC_Z,   LRBRC,
   
-                                 TO(_SINGLEQ1), SP_ENT, TAB_L,                 TAB_L, SP_ENT, TO(_SINGLEQ1)
+//                                  TO(_SINGLEQ1), SP_ENT, TAB_L,                 TAB_L, SP_ENT, TO(_SINGLEQ1)
                                 
-  ),
+//   ),
 
-   // macro layer for one-handed typing
-  [_SINGLEQ3] = LAYOUT(
+//    // macro layer for one-handed typing
+//   [_SINGLEQ3] = LAYOUT(
   
-     SINGLEQ1, SINGLEQ1,SINGLEQ2,SINGLEQ3,SINGLEQ5,XXXXXXX,                           XXXXXXX, SINGLEQ5,SINGLEQ3,SINGLEQ2,SINGLEQ1, SINGLEQ1,
+//      SINGLEQ1, SINGLEQ1,SINGLEQ2,SINGLEQ3,SINGLEQ5,XXXXXXX,                           XXXXXXX, SINGLEQ5,SINGLEQ3,SINGLEQ2,SINGLEQ1, SINGLEQ1,
   
-     SINGQ1_CTL, C(KC_P),  C(KC_W), C(KC_O), C(KC_R), C(KC_Y),                           C(KC_Y), C(KC_R), C(KC_O), C(KC_W), C(KC_P), SINGQ1_CTL,
+//      SINGQ1_CTL, C(KC_P),  C(KC_W), C(KC_O), C(KC_R), C(KC_Y),                           C(KC_Y), C(KC_R), C(KC_O), C(KC_W), C(KC_P), SINGQ1_CTL,
   
-     SINGQ1_GUI, C(KC_A),  C(KC_S), C(KC_D), C(KC_F), C(KC_H),                           C(KC_H), C(KC_F), C(KC_D), C(KC_S), C(KC_A), SINGQ1_GUI,
+//      SINGQ1_GUI, C(KC_A),  C(KC_S), C(KC_D), C(KC_F), C(KC_H),                           C(KC_H), C(KC_F), C(KC_D), C(KC_S), C(KC_A), SINGQ1_GUI,
   
-     SINGQ1_ALT, C(KC_Z),  C(KC_X), C(KC_C), C(KC_V), C(KC_N), XXXXXXX,         XXXXXXX, C(KC_N), C(KC_V), C(KC_C), C(KC_X), C(KC_Z), SINGQ1_ALT,
+//      SINGQ1_ALT, C(KC_Z),  C(KC_X), C(KC_C), C(KC_V), C(KC_N), XXXXXXX,         XXXXXXX, C(KC_N), C(KC_V), C(KC_C), C(KC_X), C(KC_Z), SINGQ1_ALT,
   
-                                     ALTY,    SHIFTY,   CTLY,                      CTLY,   SHIFTY,   ALTY
+//                                      ALTY,    SHIFTY,   CTLY,                      CTLY,   SHIFTY,   ALTY
                                 
-  ),
+//   ),
 
-   // nav layer for one-handed typing
-  [_SINGLEQ4] = LAYOUT(
+//    // nav layer for one-handed typing
+//   [_SINGLEQ4] = LAYOUT(
   
-     XXXXXXX, SINGLEQ1,SINGLEQ2,SINGLEQ3,SINGLEQ5,XXXXXXX,                           XXXXXXX, SINGLEQ5,SINGLEQ3,SINGLEQ2,SINGLEQ1, XXXXXXX,
+//      XXXXXXX, SINGLEQ1,SINGLEQ2,SINGLEQ3,SINGLEQ5,XXXXXXX,                           XXXXXXX, SINGLEQ5,SINGLEQ3,SINGLEQ2,SINGLEQ1, XXXXXXX,
   
-   SINGQ1_CTL, XXXXXXX, KC_END, KC_PGUP, KC_RIGHT, XXXXXXX,                           XXXXXXX, KC_RIGHT, KC_PGUP, KC_END, XXXXXXX, SINGQ1_CTL,
+//    SINGQ2_CTL, XXXXXXX, KC_END, KC_PGUP, KC_RIGHT, XXXXXXX,                           XXXXXXX, KC_RIGHT, KC_PGUP, KC_END, XXXXXXX, SINGQ2_CTL,
   
-   SINGQ1_GUI, XXXXXXX, KC_HOME, KC_PGDN, KC_END, XXXXXXX,                            XXXXXXX,  KC_END, KC_PGDN, KC_HOME, XXXXXXX, SINGQ1_GUI,
+//    SINGQ2_GUI, XXXXXXX, KC_HOME, KC_PGDN, KC_END, XXXXXXX,                            XXXXXXX,  KC_END, KC_PGDN, KC_HOME, XXXXXXX, SINGQ2_GUI,
   
-   SINGQ1_ALT, XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,  KC_TAB, XXXXXXX, XXXXXXX, XXXXXXX, SINGQ1_ALT,
+//    SINGQ2_ALT, XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,  KC_TAB, XXXXXXX, XXXXXXX, XXXXXXX, SINGQ2_ALT,
   
-                                     ALTY,    SHIFTY,   CTLY,                     CTLY,    SHIFTY,   ALTY
+//                                      ALTY,    SHIFTY,   CTLY,                     CTLY,    SHIFTY,   ALTY
                                 
-  ),
+//   ),
 
 //    // modifiers layer for one-handed typing
 //   [_SINGLEQ5] = LAYOUT(
@@ -235,108 +233,108 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 
 //   ),
 
-  [_QWERTY] = LAYOUT(
+//   [_QWERTY] = LAYOUT(
   
-      KC_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   WORKMAN,
+//       KC_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   WORKMAN,
   
-      KC_MINS,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
+//       KC_MINS,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
   
-      KC_EQL,   KC_A,    KC_S,    KC_D,    KC_F,   KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,   SFT_SCLN, KC_QUOT,
+//       KC_EQL,   KC_A,    KC_S,    KC_D,    KC_F,   KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,   SFT_SCLN, KC_QUOT,
   
-      KC_LBRC,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  XXXXXXX,          XXXXXXX,  KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, KC_RBRC,
+//       KC_LBRC,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  XXXXXXX,          XXXXXXX,  KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, KC_RBRC,
   
-                                   MO(_LOWER), KC_SPC, KC_TAB,                   KC_BSPC, KC_ENT, MO(_RAISE)
+//                                    MO(_LOWER), KC_SPC, KC_TAB,                   KC_BSPC, KC_ENT, MO(_RAISE)
+                                
+//   ),
+
+//   [_WORKMAN] = LAYOUT(
+  
+//       KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    QWERTY,
+  
+//      KC_MINS,  KC_Q,    KC_D,    KC_R ,   KC_W,   KC_BSLS,                             KC_J,    KC_F,    KC_U,    KC_P,   KC_SCLN, KC_BSLS,
+  
+//       KC_EQL,  KC_A,    KC_I,    KC_H,    KC_T,    KC_G,                               KC_H,    KC_N,    KC_E,    KC_O,   SFT_I,   KC_QUOT,
+  
+//       KC_LBRC, KC_Z,    KC_X,    KC_M,    KC_C,    KC_V,   XXXXXXX,          XXXXXXX,  KC_K,    KC_L,   KC_COMM, KC_DOT,  KC_SLSH, KC_RBRC,
+  
+//                                    MO(_LOWER), KC_SPC, KC_TAB,                   KC_BSPC, KC_ENT, MO(_RAISE)
+                                
+//   ),
+
+   // base layer for one-handed typing
+  [_SINGLE1] = LAYOUT(
+  
+      ESC_GR,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    ESC_GR,
+  
+      MIN_EQS,  KC_T,    KC_H,    KC_E,    KC_R,    KC_S,                              KC_S,    KC_R,    KC_E,    KC_H,    KC_T,    MIN_EQS,
+  
+      SHIFTY,   KC_U,    KC_A,    KC_I,    KC_O,    KC_N,                              KC_N,    KC_O,    KC_I,    KC_A,    KC_U,    SHIFTY,
+  
+      KC_BSPC,   KC_L,    KC_D,    KC_C,    KC_M,    KC_F,  XXXXXXX,          XXXXXXX,  KC_F,    KC_M,    KC_C,    KC_D,    KC_L,    KC_BSPC,
+  
+                                 TO(_SINGLE2),SP_ENT,TO(_SINGLE4),             TO(_SINGLE4),SP_ENT,TO(_SINGLE2)
                                 
   ),
 
-  [_WORKMAN] = LAYOUT(
+   // secondary layer for one-handed typing
+  [_SINGLE2] = LAYOUT(
   
-      KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    QWERTY,
+      KC_ESC,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_ESC,
   
-     KC_MINS,  KC_Q,    KC_D,    KC_R ,   KC_W,   KC_BSLS,                             KC_J,    KC_F,    KC_U,    KC_P,   KC_SCLN, KC_BSLS,
+     QUOT_SLS,  KC_P,    KC_X,    KC_E,    KC_V,    KC_Y,                              KC_Y,    KC_V,    KC_Q,    KC_X,    KC_P,   QUOT_SLS,
   
-      KC_EQL,  KC_A,    KC_I,    KC_H,    KC_T,    KC_G,                               KC_H,    KC_N,    KC_E,    KC_O,   SFT_I,   KC_QUOT,
+      SHIFTY,   KC_K,    KC_W,    KC_Q,    KC_J,    KC_G,                              KC_G,    KC_J,    KC_E,    KC_W,    KC_K,    SHIFTY,
   
-      KC_LBRC, KC_Z,    KC_X,    KC_M,    KC_C,    KC_V,   XXXXXXX,          XXXXXXX,  KC_K,    KC_L,   KC_COMM, KC_DOT,  KC_SLSH, KC_RBRC,
+      LRBRC,    KC_Z,  KC_COMM,  KC_DOT,  KC_SLSH,  KC_B,  XXXXXXX,          XXXXXXX,  KC_B,   KC_SLSH,  KC_DOT, KC_COMM,  KC_Z,    LRBRC,
   
-                                   MO(_LOWER), KC_SPC, KC_TAB,                   KC_BSPC, KC_ENT, MO(_RAISE)
+                                 TO(_SINGLE1), KC_SPC, KC_TAB,                    KC_TAB, KC_SPC, TO(_SINGLE1)
                                 
   ),
 
-//    // base layer for one-handed typing
-//   [_SINGLE1] = LAYOUT(
+   // macro layer for one-handed typing
+  [_SINGLE3] = LAYOUT(
   
-//       ESC_GR,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    ESC_GR,
+     SINGLE1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, SINGLE1,
   
-//       MIN_EQS,  KC_T,    KC_H,    KC_E,    KC_R,    KC_S,                              KC_S,    KC_R,    KC_E,    KC_H,    KC_T,    MIN_EQS,
+     XXXXXXX, C(KC_P),  C(KC_W), C(KC_O), C(KC_R), C(KC_Y),                           C(KC_Y), C(KC_R), C(KC_O), C(KC_W), C(KC_P), XXXXXXX,
   
-//       SHIFTY,   KC_U,    KC_A,    KC_I,    KC_O,    KC_N,                              KC_N,    KC_O,    KC_I,    KC_A,    KC_U,    SHIFTY,
+     XXXXXXX, C(KC_A),  C(KC_S), C(KC_D), C(KC_F), C(KC_H),                           C(KC_H), C(KC_F), C(KC_D), C(KC_S), C(KC_A), XXXXXXX,
   
-//       KC_BSPC,   KC_L,    KC_D,    KC_C,    KC_M,    KC_F,  XXXXXXX,          XXXXXXX,  KC_F,    KC_M,    KC_C,    KC_D,    KC_L,    KC_BSPC,
+     XXXXXXX, C(KC_Z),  C(KC_X), C(KC_C), C(KC_V), C(KC_N), XXXXXXX,         XXXXXXX, C(KC_N), C(KC_V), C(KC_C), C(KC_X), C(KC_Z), XXXXXXX,
   
-//                                  TO(_SINGLE2),SP_ENT,TO(_SINGLE4),             TO(_SINGLE4),SP_ENT,TO(_SINGLE2)
+                                     ALTY,    SHIFTY,   CTLY,                      CTLY,   SHIFTY,   ALTY
                                 
-//   ),
+  ),
 
-//    // secondary layer for one-handed typing
-//   [_SINGLE2] = LAYOUT(
+   // nav layer for one-handed typing
+  [_SINGLE4] = LAYOUT(
   
-//       KC_ESC,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_ESC,
+     XXXXXXX, SINGLE1, SINGLE2, SINGLE3, SINGLE5,  XXXXXXX,                            XXXXXXX, SINGLE5, SINGLE3, SINGLE2, SINGLE1, XXXXXXX,
   
-//      QUOT_SLS,  KC_P,    KC_X,    KC_E,    KC_V,    KC_Y,                              KC_Y,    KC_V,    KC_Q,    KC_X,    KC_P,   QUOT_SLS,
+    SING1_CTL, XXXXXXX, KC_HOME, KC_UP,   KC_END,   KC_PGUP,                           KC_PGUP, KC_HOME, KC_UP,   KC_END,  XXXXXXX, SING1_CTL,
   
-//       SHIFTY,   KC_K,    KC_W,    KC_Q,    KC_J,    KC_G,                              KC_G,    KC_J,    KC_E,    KC_W,    KC_K,    SHIFTY,
+    SING1_GUI, XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PGDN,                           KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, SING1_GUI,
   
-//       LRBRC,    KC_Z,  KC_COMM,  KC_DOT,  KC_SLSH,  KC_B,  XXXXXXX,          XXXXXXX,  KC_B,   KC_SLSH,  KC_DOT, KC_COMM,  KC_Z,    LRBRC,
+    SING1_ALT, XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,  KC_TAB, XXXXXXX, XXXXXXX, XXXXXXX, SING1_ALT,
   
-//                                  TO(_SINGLE1), KC_SPC, KC_TAB,                    KC_TAB, KC_SPC, TO(_SINGLE1)
+                                     ALTY,    SHIFTY,   CTLY,                     CTLY,    SHIFTY,   ALTY
                                 
-//   ),
+  ),
 
-//    // macro layer for one-handed typing
-//   [_SINGLE3] = LAYOUT(
+   // modifiers layer for one-handed typing
+  [_SINGLE5] = LAYOUT(
   
-//      SINGLE1, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, SINGLE1,
+   TG(_SINGLE5), KC_1,  KC_2,    KC_3,    KC_4,    KC_5,                               KC_1,    KC_2,    KC_3,    KC_4,    KC_5, TG(_SINGLE5),
   
-//      XXXXXXX, C(KC_P),  C(KC_W), C(KC_O), C(KC_R), C(KC_Y),                           C(KC_Y), C(KC_R), C(KC_O), C(KC_W), C(KC_P), XXXXXXX,
+    SING2_CTL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   WINY,                              WINY,    KC_F4,   KC_F3,   KC_F2,   KC_F1,  SING2_CTL,
   
-//      XXXXXXX, C(KC_A),  C(KC_S), C(KC_D), C(KC_F), C(KC_H),                           C(KC_H), C(KC_F), C(KC_D), C(KC_S), C(KC_A), XXXXXXX,
+    SING2_GUI,  KC_F1,   KC_F2,   KC_F3,   KC_F4,  SHIFTY,                             SHIFTY,  KC_F4,   KC_F3,   KC_F2,   KC_F1,  SING2_GUI,
   
-//      XXXXXXX, C(KC_Z),  C(KC_X), C(KC_C), C(KC_V), C(KC_N), XXXXXXX,         XXXXXXX, C(KC_N), C(KC_V), C(KC_C), C(KC_X), C(KC_Z), XXXXXXX,
+    SING2_ALT,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   CTLY,  XXXXXXX,          XXXXXXX,  CTLY,    KC_F4,   KC_F3,   KC_F2,   KC_F1,  SING2_ALT,
   
-//                                      ALTY,    SHIFTY,   CTLY,                      CTLY,   SHIFTY,   ALTY
+                                   ALTY,  MO(_MODS), TO(_SINGLE1),           TO(_SINGLE1), MO(_MODS), ALTY
                                 
-//   ),
-
-//    // nav layer for one-handed typing
-//   [_SINGLE4] = LAYOUT(
-  
-//      XXXXXXX, SINGLE1, SINGLE2, SINGLE3, SINGLE5,  XXXXXXX,                           XXXXXXX, SINGLE5, SINGLE3, SINGLE2, SINGLE1, XXXXXXX,
-  
-//     SING1_CTL, XXXXXXX, KC_END, KC_PGUP, KC_RIGHT, XXXXXXX,                           XXXXXXX, KC_RIGHT, KC_PGUP, KC_END, XXXXXXX, SING1_CTL,
-  
-//     SING1_GUI, XXXXXXX, KC_HOME, KC_PGDN, KC_END, XXXXXXX,                            XXXXXXX,  KC_END, KC_PGDN, KC_HOME, XXXXXXX, SING1_GUI,
-  
-//     SING1_ALT, XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX,  KC_TAB, XXXXXXX, XXXXXXX, XXXXXXX, SING1_ALT,
-  
-//                                      ALTY,    SHIFTY,   CTLY,                     CTLY,    SHIFTY,   ALTY
-                                
-//   ),
-
-//    // modifiers layer for one-handed typing
-//   [_SINGLE5] = LAYOUT(
-  
-//    TG(_SINGLE5), KC_1,  KC_2,    KC_3,    KC_4,    KC_5,                               KC_1,    KC_2,    KC_3,    KC_4,    KC_5, TG(_SINGLE5),
-  
-//     SING2_CTL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   WINY,                              WINY,    KC_F4,   KC_F3,   KC_F2,   KC_F1,  SING2_CTL,
-  
-//     SING2_GUI,  KC_F1,   KC_F2,   KC_F3,   KC_F4,  SHIFTY,                             SHIFTY,  KC_F4,   KC_F3,   KC_F2,   KC_F1,  SING2_GUI,
-  
-//     SING2_ALT,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   CTLY,  XXXXXXX,          XXXXXXX,  CTLY,    KC_F4,   KC_F3,   KC_F2,   KC_F1,  SING2_ALT,
-  
-//                                    ALTY,  MO(_MODS), TO(_SINGLE1),           TO(_SINGLE1), MO(_MODS), ALTY
-                                
-//   ),
+  ),
 
   [_WASD] = LAYOUT(
   
@@ -416,7 +414,7 @@ TG(_NUMBERS_L),XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      
   
      SHIFT,   KC_LSFT, KC_LCTL, KC_LGUI, KC_LALT, KC_MPLY,                            KC_MPLY, KC_HOME,  KC_PGDN, KC_END, XXXXXXX, XXXXXXX,
   
-     XXXXXXX,  SH_TG,  SH_TG,   KC_MEH,  KC_HYPR, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+     XXXXXXX, XXXXXXX, XXXXXXX, KC_MEH,  KC_HYPR, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   
                                    TG(_LOWER), XXXXXXX, XXXXXXX,                 KC_BSPC, XXXXXXX, MO(_MODS)
                                 
@@ -656,26 +654,8 @@ void matrix_scan_user(void) {
     leading = false;
     leader_end();
 
-    SEQ_ONE_KEY(KC_F) {
-      layer_on(_SINGLEQ3);
-    }
-
-    SEQ_ONE_KEY(KC_J) {
-      layer_on(_SINGLEQ3);
-    }
-
-    SEQ_ONE_KEY(KC_G) {
-      layer_on(_MODS);
-    }
-
-    SEQ_ONE_KEY(KC_H) {
-      layer_on(_MODS);
-    }
-
-    SEQ_ONE_KEY(KC_BSPC)
-
     SEQ_THREE_KEYS(RGB_HUD, RGB_HUI, RGB_M_K) {
-      layer_on(_SINGLEQ1);
+      layer_on(_SINGLE1);
     }
   }
 }
