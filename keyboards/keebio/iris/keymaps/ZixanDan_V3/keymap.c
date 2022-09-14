@@ -135,13 +135,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 //    {{5, 9}, {4, 9}, {3, 9}, {2, 9}, {1, 9}, {0, 9}},
 // };
 
-#ifdef COMBO
-const uint16_t PROGMEM ZXCV_combo[] = {KC_Z, KC_X, KC_C, KC_V, COMBO_END};
-combo_t key_combos[COMBO_COUNT] = {
-  COMBO(ZXCV_combo, SH_OS)
-};
-#endif
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOCKED] = LAYOUT(
@@ -229,7 +222,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
 //    SINGQ2_ALT,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   CTLY,  XXXXXXX,          XXXXXXX,  CTLY,    KC_F4,   KC_F3,   KC_F2,   KC_F1,  SINGQ2_ALT,
   
-//                                   ALTY,  MO(_MODS), TO(_SINGLEQ1),          TO(_SINGLEQ1), MO(_MODS), ALTY
+//                                   ALTY,  TT(_MODS), TO(_SINGLEQ1),          TO(_SINGLEQ1), TT(_MODS), ALTY
                                 
 //   ),
 
@@ -243,7 +236,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
       KC_LBRC,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  XXXXXXX,          XXXXXXX,  KC_N,    KC_M,   KC_COMM, KC_DOT,  KC_SLSH, KC_RBRC,
   
-                                   MO(_LOWER), KC_SPC, KC_TAB,                   KC_BSPC, KC_ENT, MO(_RAISE)
+                                   TT(_LOWER), KC_SPC, KC_TAB,                   KC_BSPC, KC_ENT, TT(_RAISE)
                                 
   ),
 
@@ -257,7 +250,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
       KC_EQL,  KC_X,    KC_C,    KC_D,    KC_V,    KC_LEAD,   XXXXXXX,       XXXXXXX,  KC_LEAD, KC_M, KC_H, KC_DOT,  KC_SLSH, KC_RBRC,
   
-                                   MO(_LOWER), SP_ENT, KC_TAB,                   KC_BSPC, SP_ENT, MO(_RAISE)
+                                   TT(_LOWER), SP_ENT, KC_TAB,                   KC_BSPC, SP_ENT, TT(_RAISE)
                                 
   ),
 
@@ -285,7 +278,7 @@ TG(_NUMBERS_L), KC_PEQL, KC_PSLS, KC_PAST, KC_PMNS, XXXXXXX,                   X
   
       XXXXXXX, KC_0,     KC_1,    KC_2,    KC_3, KC_PDOT, XXXXXXX,    XXXXXXX,   KC_0,   KC_1,   KC_2,    KC_3,    KC_PDOT, XXXXXXX,
   
-                                    MO(_LOWER), KC_SPC, KC_TAB,                  KC_BSPC, KC_ENT, MO(_RAISE)
+                                    TT(_LOWER), KC_SPC, KC_TAB,                  KC_BSPC, KC_ENT, TT(_RAISE)
                                 
   ),
 
@@ -299,7 +292,7 @@ TG(_NUMBERS_L), KC_PEQL, KC_PSLS, KC_PAST, KC_PMNS, XXXXXXX,                   X
   
      XXXXXXX, XXXXXXX, XXXXXXX, KC_MEH,  KC_HYPR, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   
-                                   TG(_LOWER), XXXXXXX, XXXXXXX,                 KC_BSPC, XXXXXXX, MO(_MODS)
+                                   TG(_LOWER), XXXXXXX, XXXXXXX,                 KC_BSPC, XXXXXXX, TT(_MODS)
                                 
   ),
  
@@ -307,13 +300,13 @@ TG(_NUMBERS_L), KC_PEQL, KC_PSLS, KC_PAST, KC_PMNS, XXXXXXX,                   X
   
      KC_ESC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   
-     KC_GRV,   KC_F1,   KC_F2,   KC_F3,   KC_F4,  XXXXXXX,                       XXXXXXX,OSM(MOD_RALT),OSM(MOD_RGUI),OSM(MOD_RCTL),OSM(MOD_RSFT), XXXXXXX,
+     KC_GRV,   KC_F1,   KC_F2,   KC_F3,   KC_F4,  XXXXXXX,                            XXXXXXX, ALTY, WINY, CTLY, SHIFTY, XXXXXXX,
   
      KC_CAPS,  KC_F5,   KC_F6,   KC_F7,   KC_F8,  XXXXXXX,                            KC_MPLY, KC_RALT, KC_RGUI, KC_RCTL, KC_RSFT, XXXXXXX,
   
      XXXXXXX,  KC_F9,   KC_F10,  KC_F11,  KC_F12, XXXXXXX,  XXXXXXX,         XXXXXXX, XXXXXXX, KC_HYPR, KC_MEH,  SH_TG,   SH_TG, XXXXXXX,
   
-                                   MO(_MODS), KC_LCTL, KC_LALT,                  XXXXXXX, XXXXXXX, TG(_RAISE)
+                                   TT(_MODS), KC_LCTL, KC_LALT,                  XXXXXXX, XXXXXXX, TG(_RAISE)
                                 
   ),
 
@@ -429,7 +422,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
    return true;
 }
 
-#ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
    if (index == 0) {
       // Left encoder
@@ -501,9 +493,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     }
     return true;
 }
-#endif
 
-#ifdef RGBLIGHT_ENABLE
 layer_state_t layer_state_set_user(layer_state_t state) {
    if (!fixed_rgb)
       rgb_mode = rgblight_get_mode();
@@ -527,9 +517,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     }
   return state;
 }
-#endif
 
-#ifdef LEADER_ENABLE
 LEADER_EXTERNS();
 
 void matrix_scan_user(void) {
@@ -557,4 +545,3 @@ void matrix_scan_user(void) {
     SEQ_ONE_KEY(KC_5) {tap_code16(LGUI(KC_5));}
   }
 }
-#endif
