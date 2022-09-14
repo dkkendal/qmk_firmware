@@ -545,45 +545,16 @@ void matrix_scan_user(void) {
       layer_on(_NEIO);
     }
 
-    SEQ_ONE_KEY(KC_TAB) {
-      tap_code(LALT(KC_TAB));
-    }
-
-    SEQ_ONE_KEY(KC_D) {
-      tap_code(LGUI(KC_D));
-    }
-
-    SEQ_ONE_KEY(KC_S) {
-      tap_code(LCTL(KC_S));
-    }
-
-    SEQ_ONE_KEY(KC_T) {
-      tap_code(LCTL(KC_T));
-    }
-
-    SEQ_ONE_KEY(KC_N) {
-      tap_code(LCTL(KC_N));
-    }
-
-    SEQ_ONE_KEY(KC_1) {
-      tap_code(LGUI(KC_1));
-    }
-
-    SEQ_ONE_KEY(KC_2) {
-      tap_code(LGUI(KC_2));
-    }
-
-    SEQ_ONE_KEY(KC_3) {
-      tap_code(LGUI(KC_3));
-    }
-
-    SEQ_ONE_KEY(KC_4) {
-      tap_code(LGUI(KC_4));
-    }
-
-    SEQ_ONE_KEY(KC_5) {
-      tap_code(LGUI(KC_5));
-    }
+    SEQ_ONE_KEY(KC_TAB) {tap_code16(LALT(KC_TAB));}
+    SEQ_ONE_KEY(KC_D) {tap_code16(LGUI(KC_D));}
+    SEQ_ONE_KEY(KC_S) {tap_code16(LCTL(KC_S));}
+    SEQ_ONE_KEY(KC_T) {tap_code16(LCTL(KC_T));}
+    SEQ_ONE_KEY(KC_N) {tap_code16(LCTL(KC_N));}
+    SEQ_ONE_KEY(KC_1) {tap_code16(LGUI(KC_1));}
+    SEQ_ONE_KEY(KC_2) {tap_code16(LGUI(KC_2));}
+    SEQ_ONE_KEY(KC_3) {tap_code16(LGUI(KC_3));}
+    SEQ_ONE_KEY(KC_4) {tap_code16(LGUI(KC_4));}
+    SEQ_ONE_KEY(KC_5) {tap_code16(LGUI(KC_5));}
   }
 }
 #endif
