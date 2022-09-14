@@ -1,4 +1,5 @@
 #include QMK_KEYBOARD_H
+#include <stdbool.h>
 
 enum layer_names {
    _QWERTY,
