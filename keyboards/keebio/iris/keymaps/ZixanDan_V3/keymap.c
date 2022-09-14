@@ -147,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
      RGB_HUI, RGB_HUD, RGB_HUI, RGB_HUD, RGB_HUI, RGB_HUD, XXXXXXX,    XXXXXXX, RGB_HUD, RGB_HUI, RGB_HUD, RGB_HUI, RGB_HUD, RGB_HUI,
   
-                                    RGB_M_K, RGB_HUD, RGB_HUI,                 RGB_HUI, RGB_HUD, RGB_M_K
+                                    RGB_M_K, RGB_HUD, RGB_HUI,               RGB_HUI, RGB_HUD, RGB_M_K
                                 
   ),
 
@@ -228,7 +228,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
   
-      KC_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   NEIO,
+      KC_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,   KC_DEL,
   
       KC_MINS,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                              KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
   
@@ -241,8 +241,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_NEIO] = LAYOUT(
-  
-      KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7, KC_8, KC_9,    KC_0,    QWERTY,
+
+      KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7, KC_8, KC_9,    KC_0,    KC_DEL,
   
      KC_MINS,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                               KC_J,    KC_L, KC_U, KC_Y,   KC_SCLN, KC_BSLS,
   
@@ -426,14 +426,12 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
    if (index == 0) {
       // Left encoder
       switch (biton32(layer_state)) {
-         #ifdef RGBLIGHT_ENABLE
          case _LOCKED:
             if (clockwise)
                rgblight_increase_hue_noeeprom();
             else
                rgblight_decrease_hue_noeeprom();
             break;
-         #endif
          case _NAVI:
             if (clockwise)
                tap_code(KC_WH_L);
@@ -460,14 +458,12 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     else if (index == 1) {
       // Right encoder
       switch (biton32(layer_state)) {
-         #ifdef RGBLIGHT_ENABLE
          case _LOCKED:
             if (clockwise)
                rgblight_increase_val_noeeprom();
             else
                rgblight_decrease_val_noeeprom();
             break;
-         #endif
          case _NAVI:
             if (clockwise)
                tap_code(KC_WH_D);
@@ -494,29 +490,29 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     return true;
 }
 
-layer_state_t layer_state_set_user(layer_state_t state) {
-   if (!fixed_rgb)
-      rgb_mode = rgblight_get_mode();
+// layer_state_t layer_state_set_user(layer_state_t state) {
+//    if (!fixed_rgb)
+//       rgb_mode = rgblight_get_mode();
    
-   fixed_rgb = true;
+//    fixed_rgb = true;
 
-   switch (get_highest_layer(state)) {
-      case _WASD:
-      case _MOBA:
-         rgblight_sethsv_noeeprom(HSV_RED);
-         break;
-      case _NUMBERS_L:
-         rgblight_sethsv_noeeprom(HSV_MAGENTA);
-         break;
-      default: //  for any other layers, or the default layer
-         if (fixed_rgb){
-            fixed_rgb = false;
-            rgblight_mode_noeeprom(rgb_mode);
-         }
-         break;
-    }
-  return state;
-}
+//    switch (get_highest_layer(state)) {
+//       case _WASD:
+//       case _MOBA:
+//          rgblight_sethsv_noeeprom(HSV_RED);
+//          break;
+//       case _NUMBERS_L:
+//          rgblight_sethsv_noeeprom(HSV_MAGENTA);
+//          break;
+//       default: //  for any other layers, or the default layer
+//          if (fixed_rgb){
+//             fixed_rgb = false;
+//             rgblight_mode_noeeprom(rgb_mode);
+//          }
+//          break;
+//     }
+//   return state;
+// }
 
 LEADER_EXTERNS();
 
@@ -525,11 +521,11 @@ void matrix_scan_user(void) {
     leading = false;
     leader_end();
 
-    SEQ_THREE_KEYS(RGB_HUD, RGB_HUI, RGB_M_K) {
-      layer_on(_SINGLE1);
+    SEQ_TWO_KEYS(RGB_HUD, RGB_HUI) {
+      layer_on(_QWERTY);
     }
 
-    SEQ_THREE_KEYS(RGB_HUD, RGB_HUD, RGB_M_K) {
+    SEQ_TWO_KEYS(RGB_HUI, RGB_HUD) {
       layer_on(_NEIO);
     }
 
